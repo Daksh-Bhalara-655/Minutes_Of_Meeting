@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Add Meeting Type";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/css/add-meeting-type.css" />
+
+
+    <div class="container">
+
+        <!-- Page Header -->
+        <div class="mb-4">
+            <h4 class="main-title">Add Meeting Type</h4>
+            <p class="sub-title">Create a new meeting type</p>
+        </div>
+
+        <!-- Card -->
+        <div class="card custom-card">
+
+            <div class="card-header-custom">
+                <i class="bi bi-calendar-event-fill"></i>
+                Add Meeting Type
+            </div>
+
+            <div class="card-body p-4">
+                <form>
+
+                    <!-- Meeting Type Name -->
+                    <div class="mb-4">
+                        <label class="form-label">Meeting Type Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-end-0">
+                                <i class="bi bi-tag-fill"></i>
+                            </span>
+                            <input type="text"
+                                   class="form-control border-start-0"
+                                   placeholder="Enter meeting type name">
+                        </div>
+                    </div>
+
+                    <!-- Remarks -->
+                    <div class="mb-4">
+                        <label class="form-label">Remarks</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-end-0">
+                                <i class="bi bi-chat-left-text"></i>
+                            </span>
+                            <textarea class="form-control border-start-0"
+                                      rows="3"
+                                      placeholder="Optional remarks"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Guidelines -->
+                    <div class="info-box mb-4">
+                        <div class="info-title">
+                            <i class="bi bi-info-circle"></i>
+                            Meeting Type Guidelines
+                        </div>
+                        <ul>
+                            <li>Meeting type name must be unique</li>
+                            <li>Use clear and short names</li>
+                            <li>Remarks are optional</li>
+                        </ul>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="d-flex justify-content-end gap-3">
+                        <a href="/MeetingType/MeetingTypeList" class="back-link">
+                            <i class="bi bi-arrow-left"></i> Back to List
+                        </a>
+
+                        <button type="submit" class="btn btn-primary-custom">
+                            <i class="bi bi-check-circle"></i> Save Meeting Type
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>

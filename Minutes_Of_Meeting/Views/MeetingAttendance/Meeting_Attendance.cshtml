@@ -1,0 +1,208 @@
+﻿@{
+    ViewData["Title"] = "Meeting Attendance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/meeting-attendance.css" />
+
+<div class="container-fluid">
+
+    <!-- HEADER -->
+    <div class="attendance-header mb-3">
+        <i class="bi bi-calendar-check"></i>
+        <strong>Attendance</strong>
+        | Date: <span>26-12-2025</span>
+        | Time Slot: <span>11:40 AM - 1:10 PM</span>
+        | Total Staff: <span class="badge bg-primary">20</span>
+    </div>
+
+    <!-- FILTER SECTION -->
+    <div class="card filter-card mb-3">
+        <div class="card-body">
+
+            <div class="row g-3">
+
+                <div class="col-md-3">
+                    <label class="form-label">Department</label>
+                    <select class="form-select">
+                        <option>Select Department</option>
+                        <option>IT</option>
+                        <option>HR</option>
+                        <option>Finance</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Meeting Type</label>
+                    <select class="form-select">
+                        <option>Select Meeting Type</option>
+                        <option>Weekly Review</option>
+                        <option>Board Meeting</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Meeting Date</label>
+                    <input type="date" class="form-control" />
+                </div>
+
+                <div class="col-md-3 d-flex align-items-end">
+                    <button class="btn btn-primary-custom w-100">
+                        <i class="bi bi-funnel"></i> Filter
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ATTENDANCE TYPE -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <strong>Attendance Type:</strong>
+            <div class="form-check form-check-inline ms-3">
+                <input class="form-check-input" type="radio" checked>
+                <label class="form-check-label">Present</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio">
+                <label class="form-check-label">Absent</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- STAFF TABLE -->
+    <div class="card custom-card">
+
+        <div class="card-header-custom d-flex justify-content-between">
+            <span><i class="bi bi-people"></i> Tick Staff Who Are Present</span>
+
+            <div class="summary-badges">
+                <span class="badge bg-primary">20 Total</span>
+                <span class="badge bg-success">5 Present</span>
+                <span class="badge bg-danger">15 Absent</span>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th width="40"></th>
+                        <th>Staff ID</th>
+                        <th>Staff Name</th>
+                        <th>Department</th>
+                        <th>Attendance %</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="present-row">
+                        <td><input type="checkbox" checked /></td>
+                        <td>EMP001</td>
+                        <td>Neeraj Ahuja</td>
+                        <td>IT</td>
+                        <td class="text-success">88.24%</td>
+                        <td><span class="badge bg-success">Present</span></td>
+                    </tr>
+
+                    <tr class="absent-row">
+                        <td><input type="checkbox" /></td>
+                        <td>EMP002</td>
+                        <td>Rahul Sharma</td>
+                        <td>HR</td>
+                        <td class="text-danger">64.71%</td>
+                        <td><span class="badge bg-danger">Absent</span></td>
+                    </tr>
+
+                    <tr class="absent-row">
+                        <td><input type="checkbox" /></td>
+                        <td>EMP003</td>
+                        <td>Pooja Mehta</td>
+                        <td>Finance</td>
+                        <td class="text-warning">76.47%</td>
+                        <td><span class="badge bg-danger">Absent</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card-footer text-end">
+            <button class="btn btn-success">
+                <i class="bi bi-save"></i> Save Attendance
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const departmentSelect = document.querySelector("select:nth-of-type(1)");
+        const filterBtn = document.querySelector(".btn-primary-custom");
+
+        const checkboxes = document.querySelectorAll("tbody input[type='checkbox']");
+        const presentBadge = document.querySelector(".bg-success");
+        const absentBadge = document.querySelector(".bg-danger");
+
+        /* ===== FILTER BY DEPARTMENT ===== */
+        filterBtn.addEventListener("click", function () {
+            const selectedDept = departmentSelect.value.toLowerCase();
+            const rows = document.querySelectorAll("tbody tr");
+
+            rows.forEach(row => {
+                const deptCell = row.children[3].innerText.toLowerCase();
+
+                if (selectedDept === "select department" || selectedDept === "") {
+                    row.style.display = "";
+                } else {
+                    row.style.display = deptCell === selectedDept ? "" : "none";
+                }
+            });
+        });
+
+        /* ===== TOGGLE PRESENT / ABSENT ===== */
+        checkboxes.forEach(cb => {
+            cb.addEventListener("change", function () {
+                const row = this.closest("tr");
+                const statusCell = row.children[5];
+                const percentCell = row.children[4];
+
+                if (this.checked) {
+                    row.classList.remove("absent-row");
+                    row.classList.add("present-row");
+                    statusCell.innerHTML = `<span class="badge bg-success">Present</span>`;
+                    percentCell.classList.remove("text-danger");
+                    percentCell.classList.add("text-success");
+                } else {
+                    row.classList.remove("present-row");
+                    row.classList.add("absent-row");
+                    statusCell.innerHTML = `<span class="badge bg-danger">Absent</span>`;
+                    percentCell.classList.remove("text-success");
+                    percentCell.classList.add("text-danger");
+                }
+
+                updateCounts();
+            });
+        });
+
+        /* ===== UPDATE COUNTS ===== */
+        function updateCounts() {
+            let present = 0;
+            let absent = 0;
+
+            checkboxes.forEach(cb => {
+                cb.checked ? present++ : absent++;
+            });
+
+            presentBadge.innerText = present + " Present";
+            absentBadge.innerText = absent + " Absent";
+        }
+
+        updateCounts();
+    });
+</script>

@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "Department List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/css/department-list.css" />
+
+    <div class="container">
+
+        <!-- Page Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h4 class="main-title">Departments</h4>
+                <p class="sub-title">Manage organization departments</p>
+            </div>
+            <a asp-controller="Department" asp-action="Create" class="btn btn-primary-custom">
+                <i class="bi bi-plus-circle"></i> Add Department
+            </a>
+        </div>
+
+        <!-- Card -->
+        <div class="card custom-card">
+
+            <div class="card-header-custom">
+                <i class="bi bi-diagram-3-fill"></i>
+                Department List
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Department Name</th>
+                            <th>Created Date</th>
+                            <th>Last Modified</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- STATIC DATA -->
+                        <tr>
+                            <td>1</td>
+                            <td>Operations</td>
+                            <td>2024-01-10</td>
+                            <td>2024-02-05</td>
+                            <td class="text-end">
+                                <div class="action-btn-group">
+                                    <a href="#" class="action-btn view"><i class="bi bi-eye"></i></a>
+                                <a asp-controller="Department" asp-action="Create" class="action-btn edit"><i class="bi bi-pencil"></i></a>
+                                    <a href="#" class="action-btn delete"><i class="bi bi-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>Finance</td>
+                            <td>2024-01-15</td>
+                            <td>2024-02-01</td>
+                            <td class="text-end">
+                                <div class="action-btn-group">
+                                    <a href="#" class="action-btn view"><i class="bi bi-eye"></i></a>
+                                <a asp-controller="Department" asp-action="Create" class="action-btn edit"><i class="bi bi-pencil"></i></a>
+                                    <a href="#" class="action-btn delete"><i class="bi bi-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>3</td>
+                            <td>IT</td>
+                            <td>2024-01-20</td>
+                            <td>2024-02-10</td>
+                            <td class="text-end">
+                                <div class="action-btn-group">
+                                    <a href="#" class="action-btn view"><i class="bi bi-eye"></i></a>
+                                <a asp-controller="Department" asp-action="Create" class="action-btn edit"><i class="bi bi-pencil"></i></a>
+                                    <a href="#" class="action-btn delete"><i class="bi bi-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+

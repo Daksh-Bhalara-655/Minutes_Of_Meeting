@@ -1,0 +1,174 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top left, #1a1f35 0%, #0d1117 100%);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+}
+
+    body::before,
+    body::after {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        filter: blur(90px);
+        z-index: -1;
+        animation: float 8s ease-in-out infinite alternate;
+    }
+
+    body::before {
+        background: linear-gradient(45deg, #7b2cbf, #9d4edd);
+        top: -80px;
+        right: -60px;
+        opacity: 0.4;
+    }
+
+    body::after {
+        background: linear-gradient(45deg, #4361ee, #3a0ca3);
+        bottom: -80px;
+        left: -60px;
+        opacity: 0.4;
+        animation-delay: -4s;
+    }
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(20px, -20px);
+    }
+}
+
+.mobile-container {
+    width: 90%;
+    max-width: 380px;
+    padding: 3.5rem 2rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border-radius: 40px;
+    animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo-area {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.logo-placeholder {
+    width: 180px;
+    height: 180px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border: 3px solid rgba(255, 255, 255, 0.15);
+    padding: 0px;
+    overflow: hidden;
+}
+
+    .logo-placeholder img {
+        width: 300px;
+        height: 100%;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
+
+.welcome-text {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.sub-text {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+}
+
+/* Ensure buttons are full width and consistent */
+.mobile-container .d-grid .btn,
+.mobile-container .d-grid a.btn {
+    display: inline-block;
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: none;
+}
+
+/* Primary button */
+.btn-login {
+    background: linear-gradient(90deg,#0ea5e9,#0284c7) !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: 0 8px 30px rgba(2,132,199,0.18) !important;
+}
+
+.btn-login:focus,
+.btn-login:active {
+    outline: none;
+    box-shadow: 0 10px 36px rgba(2,132,199,0.22) !important;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+}
+
+/* Secondary button */
+.btn-signup {
+    background: rgba(255,255,255,0.06) !important;
+    color: #e6eef8 !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+.btn-signup:hover {
+    background: rgba(255,255,255,0.09) !important;
+    color: #ffffff !important;
+}
+
+.btn-light {
+    background: rgba(255,255,255,0.06) !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    color: #e6eef8 !important;
+}
+
+.btn-custom { /* keep legacy class for compatibility */
+    padding: 12px 16px;
+    border-radius: 12px;
+}
+
+@media (max-width: 480px) {
+    .mobile-container { padding: 2.5rem 1.25rem; width: 92%; }
+    .logo-placeholder { width: 96px; height: 96px; }
+}

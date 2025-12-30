@@ -1,0 +1,45 @@
+@{
+    ViewData["Title"] = "Create Meeting Member";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/meeting-member.css" asp-append-version="true" />
+
+<div class="container py-5">
+    <div class="card custom-card">
+        <div class="card-header-custom">Add Meeting Member</div>
+        <div class="card-body">
+            <form asp-action="Create" method="post">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Meeting</label>
+                        <select  class="form-select" asp-items="@(ViewBag.Meetings as IEnumerable<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>)"></select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Staff</label>
+                        <select  class="form-select" asp-items="@(ViewBag.Staff as IEnumerable<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>)"></select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Present</label>
+                        <select  class="form-select">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label">Remarks</label>
+                        <textarea  class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-gradient-primary">Save</button>
+                        <a asp-action="Index" class="btn btn-outline-secondary-custom ms-2">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Add New Department";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <link rel="stylesheet" href="~/css/add-department.css" />
+
+
+    <div class="container">
+
+        <!-- Page Header -->
+        <div class="mb-4">
+            <h4 class="main-title">Add New Department</h4>
+            <p class="sub-title">Create a new department for your organization</p>
+        </div>
+
+        <!-- Card -->
+        <div class="card custom-card">
+
+            <div class="card-header-custom">
+                <i class="bi bi-diagram-3-fill"></i>
+                Add Department
+            </div>
+
+            <div class="card-body p-4">
+                <form>
+
+                    <!-- Department Name -->
+                    <div class="mb-4">
+                        <label class="form-label">Department Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-end-0">
+                                <i class="bi bi-building"></i>
+                            </span>
+                            <input type="text"
+                                   class="form-control border-start-0"
+                                   placeholder="Enter department name">
+                        </div>
+                        <div class="helper-text">
+                            Example: Operations, Finance, IT
+                        </div>
+                    </div>
+
+                    <!-- Info Box -->
+                    <div class="info-box mb-4">
+                        <div class="info-title">
+                            <i class="bi bi-info-circle"></i>
+                            Department Guidelines
+                        </div>
+                        <ul>
+                            <li>Department name must be unique</li>
+                            <li>Use clear and meaningful department names</li>
+                            <li>Departments help organize staff efficiently</li>
+                        </ul>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="d-flex justify-content-end gap-3">
+                        <a href="/Department/DepartmentList" class="back-link">
+                            <i class="bi bi-arrow-left"></i> Back to List
+                        </a>
+
+                        <button type="submit" class="btn btn-primary-custom">
+                            <i class="bi bi-check-circle"></i> Save Department
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>

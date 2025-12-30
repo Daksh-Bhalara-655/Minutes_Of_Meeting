@@ -1,0 +1,682 @@
+﻿/* Dashboard layout — avoid creating nested scrollers and keep charts visible */
+/*.dashboard-container {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    height: auto;*/           /* let page scroller handle height */
+    /*max-height: none;
+    overflow: visible;*/      /* avoid inner scrollbar */
+    /*box-sizing: border-box;
+}*/
+
+/* Prevent inner dashboard containers from creating their own scrollbars */
+/*.dashboard-container,
+.charts-row,
+.chart-card,
+.chart-container-wrapper {
+    min-height: 0;*/     /* allow flex children to shrink properly */
+    /*overflow: visible;*/ /* avoid nested scrollbars */
+    /*box-sizing: border-box;
+}*/
+
+/* Header and stats spacing tweaks */
+/*.header-section {
+    flex-shrink: 0;
+    margin-bottom: 12px;
+}*/
+
+/* --- Stats Cards --- */
+/*.stats-row {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+    margin-bottom: 26px;
+    width: 100%;
+}*/
+
+/* Individual stat card */
+/*.stat-card {
+    flex: 1 1 0;
+    position: relative;
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px 28px 18px 20px;
+    box-shadow: 0 10px 30px rgba(34,41,47,0.06);
+    min-height: 110px;
+    overflow: visible;
+    box-sizing: border-box;
+    margin: 6px 0;
+}*/
+
+/* Right-side vertical strip + circular badge used in stat cards */
+/*.stat-card {
+  padding-right: 64px;*/ /* room for the right strip + badge */
+  /*position: relative;*/  /* keep absolute children positioned correctly */
+/*}*/
+
+/* thin vertical strip */
+/*.stat-card .stat-strip {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 22px;
+  height: 86px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+  display: block;
+  z-index: 1;
+}*/
+
+/* circular badge that overlaps the strip near its top */
+/*.stat-card .stat-strip .stat-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111;*/ /* fallback, override per-type below */
+  /*color: #fff;
+  box-shadow: 0 8px 22px rgba(34,41,47,0.12);
+  z-index: 2;
+  font-size: 0.95rem;
+}*/
+
+/* small icon inside badge */
+/*.stat-card .stat-strip .stat-badge i {
+  font-size: 0.95rem;
+  line-height: 1;
+}*/
+
+/* type color variations for strip and badge (example values) */
+/*.stat-strip--purple { background: linear-gradient(#efe9ff, #efe9ff); }
+.stat-strip--green  { background: linear-gradient(#e7fff3, #e7fff3); }
+.stat-strip--teal   { background: linear-gradient(#e6fbff, #e6fbff); }
+.stat-strip--orange { background: linear-gradient(#fff3e6, #fff3e6); }*/
+
+/* badge backgrounds that contrast with the strip */
+/*.stat-strip--purple .stat-badge { background: #7367f0; }
+.stat-strip--green  .stat-badge { background: #10b981; }
+.stat-strip--teal   .stat-badge { background: #06b6d4; }
+.stat-strip--orange .stat-badge { background: #fb923c; }*/
+
+    /* Make stat card top-right icon circular and larger */
+/*.stat-card {*/
+    /* give extra room on the right so the larger icon doesn't overlap content */
+    /*padding: 22px 28px 18px 20px;
+    position: relative;
+}*/
+
+/* Make stat card top-right icon circular and larger */
+/*.stat-card {*/
+    /* give extra room on the right so the larger icon doesn't overlap content */
+    /*padding: 22px 28px 18px 20px;
+    position: relative;
+}*/
+
+/* Make stat card top-right icon circular and larger */
+/*.stat-card {*/
+    /* give extra room on the right so the larger icon doesn't overlap content */
+    /*padding: 22px 28px 18px 20px;
+    position: relative;
+}*/
+
+    /* Circular icon */
+/*.stat-card .stat-icon {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    width: 48px;*/               /* increased size */
+    /*height: 48px;*/              /* increased size */
+    /*border-radius: 50%;*/        /* circle */
+    /*display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.1rem;*/         /* icon size */
+    /*box-shadow: 0 8px 22px rgba(34,41,47,0.12);
+    transition: transform 150ms ease, box-shadow 150ms ease;
+}*/
+
+/* Slight lift on hover for affordance */
+/*.stat-card .stat-icon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(34,41,47,0.16);
+}*/
+
+/* Icon <i> sizing fallback */
+/*.stat-card .stat-icon i {
+    font-size: 1.05rem;
+    line-height: 1;
+}*/
+
+/* Color the circular icons to match card types */
+/*.stat-card.bg-light-purple .stat-icon { background: #7367f0; }
+.stat-card.bg-light-green  .stat-icon { background: #10b981; }*/ /* green */
+/*.stat-card.bg-light-blue   .stat-icon { background: #06b6d4; }*/ /* teal/blue */
+/*.stat-card.bg-light-orange .stat-icon { background: #fb923c; }*/ /* orange */
+
+/* If there is a small badge inside the icon, ensure contrast */
+/*.stat-card .stat-icon .inner-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+}*/
+    
+/* Charts area */
+/*.charts-row {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+    flex-grow: 1;
+    min-height: 0;
+    min-width: 0;
+    padding-bottom: 20px;
+    overflow: visible;
+}
+
+.chart-card {
+    background: white;
+    border-radius: 10px;
+    padding: 16px;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: 6px 0;
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 360px;
+    overflow: visible;
+}
+
+.chart-container-wrapper {
+    flex-grow: 1;
+    position: relative;
+    min-height: 0;
+    min-width: 0;
+    width: 100%;
+    padding: 8px 8px 28px 8px;
+    box-sizing: border-box;
+    overflow: visible;
+}*/
+
+/* Make chart canvas responsive */
+/*.chart-container-wrapper canvas {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+}*/
+
+/* small screens: stack charts vertically */
+/*@media (max-width: 1000px) {
+    .charts-row {
+        flex-direction: column;
+    }
+
+    .chart-card {
+        min-height: 300px;
+    }
+}*/
+
+/* ------------------------------------------------------------
+   Hide only the visual scrollbar for the page scroller
+   (.content-area-wrapper). Scrolling remains functional.
+   Scoped and appended so it doesn't affect other components.
+   ------------------------------------------------------------ */
+
+/* Ensure the page-level scroller is .content-area-wrapper (leave overflow enabled) */
+/*.content-area-wrapper {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none !important;*/  /* IE/Edge */
+    /*scrollbar-width: none !important;*/     /* Firefox */
+/*}*/
+
+/* WebKit: hide visual track/thumb for content-area-wrapper and dashboard-container */
+/*.content-area-wrapper::-webkit-scrollbar,
+.dashboard-container::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+}*/
+
+/* Thumb/track fallback to fully transparent if browser ignores display:none */
+/*.content-area-wrapper::-webkit-scrollbar-thumb,
+.dashboard-container::-webkit-scrollbar-thumb {
+    background: transparent !important;
+}*/
+
+/* Force-hide any visual scrollbar for the dashboard scroller(s).
+   Keep scrolling functional. Appended to the end to override earlier rules. */
+/*html, body,
+.content-area-wrapper,
+.dashboard-container,
+.main-wrapper,
+.container-fluid,
+#app,*/ /* in case your layout uses an #app wrapper */
+/*[class*="wrapper"] {
+    -ms-overflow-style: none !important;*/ /* IE/Edge */
+    /*scrollbar-width: none !important;*/    /* Firefox */
+/*}*/
+
+/* WebKit browsers */
+/*html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.content-area-wrapper::-webkit-scrollbar,
+.dashboard-container::-webkit-scrollbar,
+.main-wrapper::-webkit-scrollbar,
+.container-fluid::-webkit-scrollbar,
+[id^="app"]::-webkit-scrollbar,
+[class*="wrapper"]::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+}*/
+
+/* Thumb/track fallback */
+/*html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+.content-area-wrapper::-webkit-scrollbar-thumb,
+.dashboard-container::-webkit-scrollbar-thumb {
+    background: transparent !important;
+}*/
+
+/* Example: replace .THE_SELECTOR with the element shown by the console script */
+/*.THE_SELECTOR {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
+.THE_SELECTOR::-webkit-scrollbar { width:0 !important; height:0 !important; }*/
+/* Ensure page-level scrolling lives in .content-area-wrapper */
+/*html, body {
+    overflow: hidden;*/ /* page-level scroll disabled; content-area-wrapper will scroll */
+/*}*/
+
+/* The main content area becomes the single vertical scroller */
+/*.content-area-wrapper {
+    height: 100vh;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;*/
+    /* hide visual scrollbar but keep scrolling functional */
+    /*-ms-overflow-style: none !important;*/ /* IE/Edge */
+    /*scrollbar-width: none !important;*/    /* Firefox */
+/*}
+.content-area-wrapper::-webkit-scrollbar { width: 0 !important; height: 0 !important; background: transparent !important; }*/
+
+/* Make dashboard container non-scrolling and allow it to grow inside content-area-wrapper */
+/*.dashboard-container {
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;*/ /* prevent nested scrollbar */
+/*}*/
+
+/* Defensive: prevent other dashboard children from creating their own scrollbars */
+/*.dashboard-container,
+.charts-row,
+.chart-card,
+.chart-container-wrapper {
+    overflow: visible !important;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.content-area-wrapper {
+  scrollbar-width: none;
+}
+
+.content-area-wrapper::-webkit-scrollbar {
+  width: 0.4em;
+  height: 0.4em;
+}
+
+.content-area-wrapper::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.content-area-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}*/
+
+/* --- Icon rounding: make all dashboard icons and right strips rounded --- */
+/* Appended to the end of DashBord.css so it overrides existing rules where needed. */
+
+/*.icon-box,
+.stat-card .stat-icon,
+.stat-card .stat-strip .stat-badge,
+.stat-card .stat-strip .inner-badge,
+.stat-card .stat-strip .stat-badge i {
+    border-radius: 100% !important;*/   /* circular icons / badges */
+    /*overflow: hidden !important;
+}
+
+.stat-card .stat-strip {
+    border-radius: 12px !important;*/  /* pill for vertical strip */
+    /*overflow: hidden !important;
+}*/
+
+/* Ensure any inner rectangles / badges inherit rounding */
+/*.stat-card .stat-strip * {
+    border-radius: inherit !important;
+}*/
+
+/* Slight smoothing for hover / transitions */
+/*.icon-box,
+.stat-card .stat-icon,
+.stat-card .stat-strip .stat-badge {
+    transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+}*/
+
+/* Defensive: if any SVG or IMG used as icon, make them fit rounded container */
+/*.icon-box img,
+.stat-card .stat-icon img,
+.stat-card .stat-strip img,
+.stat-card .stat-strip svg,
+.stat-card .stat-icon svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}*/
+
+/* =========================
+   PERFECT CIRCULAR ICON FIX
+   Append to end of DashBord.css
+   ========================= */
+
+/* 1) Stat icon (top-right circle) */
+/*.stat-card .stat-icon {
+    width: 48px !important;
+    height: 48px !important;
+    padding: 0 !important;*/                 /* critical: no inner padding */
+    /*border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    box-shadow: 0 6px 18px rgba(34,41,47,0.10) !important;*/ /* softer shadow */
+/*}*/
+
+/* ensure icon element inside remains square/sharp */
+/*.stat-card .stat-icon i,
+.stat-card .stat-icon svg {
+    border-radius: 0 !important;
+    line-height: 1 !important;
+    display: inline-block;
+    width: auto;
+    height: auto;
+}*/
+
+/* 2) Circular badge on vertical strip */
+/*.stat-card .stat-strip .stat-badge {
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}*/
+
+/* badge icon must not inherit rounding */
+/*.stat-card .stat-strip .stat-badge i,
+.stat-card .stat-strip .stat-badge svg {
+    border-radius: 0 !important;
+    line-height: 1 !important;
+}*/
+
+/* 3) Vertical strip: pill shape (not circular) */
+/*.stat-card .stat-strip {
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}*/
+
+/* 4) Prevent over-inheritance of border-radius inside strip/badge */
+/*.stat-card .stat-strip * {
+    border-radius: 0 !important;
+}*/
+
+/* 5) Defensive: remove accidental inner padding on icon-box */
+/*.icon-box,
+.icon-box * {
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}*/
+
+/* 6) Small smoothing on hover only (non-destructive) */
+/*.stat-card .stat-icon:hover,
+.stat-card .stat-strip .stat-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(34,41,47,0.12);
+}*/
+
+/* ===== Replace / append these refined stat card styles (append to end of file) =====
+   - Ensures perfectly round icon circles, consistent padding, softer shadow
+   - Keeps badges and pastel backgrounds consistent with the dashboard look
+*/
+/*.stat-card {
+    position: relative;
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(34,41,47,0.06);
+    box-sizing: border-box;
+}*/
+
+/* icon circle (top-right small circular icon inside card or stand-alone) */
+/*.icon-box,
+.stat-card .stat-icon {
+    width: 44px;
+    height: 44px;
+    padding: 0;*/                  /* critical to keep circle perfect */
+    /*border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1rem;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    overflow: hidden;
+}*/
+
+/* if icon uses <i> or SVG, ensure it doesn't apply extra radius/padding */
+/*.icon-box i,
+.icon-box svg,
+.stat-card .stat-icon i,
+.stat-card .stat-icon svg {
+    border-radius: 0 !important;
+    padding: 0 !important;
+    line-height: 1;
+    display: inline-block;
+}*/
+
+/* Pastel backgrounds for cards */
+/*.bg-light-purple { background: #f3f0ff; }
+.bg-light-green  { background: #e8fdf5; }
+.bg-light-blue   { background: #eef6ff; }
+.bg-light-orange { background: #fff5e6; }*/
+
+/* trend badges */
+/*.badge-trend {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+}
+.badge-up   { background: #dcfce7; color: #166534; }
+.badge-down { background: #fee2e2; color: #991b1b; }*/
+
+/* Right strip + circular badge (if you use .stat-strip markup) */
+/*.stat-card .stat-strip {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 22px;
+    height: 86px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    overflow: hidden;
+}
+.stat-card .stat-strip .stat-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    color: #fff;
+    box-shadow: 0 8px 22px rgba(34,41,47,0.12);
+}*/
+
+/* type colors */
+/*.stat-strip--purple { background: linear-gradient(#efe9ff, #efe9ff); }
+.stat-strip--green  { background: linear-gradient(#e7fff3, #e7fff3); }
+.stat-strip--teal   { background: linear-gradient(#e6fbff, #e6fbff); }
+.stat-strip--orange { background: linear-gradient(#fff3e6, #fff3e6); }
+
+.stat-strip--purple .stat-badge { background: #7367f0; }
+.stat-strip--green  .stat-badge { background: #10b981; }
+.stat-strip--teal   .stat-badge { background: #06b6d4; }
+.stat-strip--orange .stat-badge { background: #fb923c; }*/
+
+/* Responsive tweaks so icon and strip don't overlap content on small widths */
+/*@media (max-width: 768px) {
+    .stat-card { padding-right: 48px; }
+    .stat-card .stat-strip { right: 14px; height: 70px; }
+    .stat-card .stat-strip .stat-badge { width: 34px; height: 34px; top: -11px; }
+}*/
+
+
+
+/* ================= LAYOUT ================= */
+.dashboard-container {
+    padding: 20px;
+}
+
+/* Avatar */
+.avatar-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #7367f0;
+    color: #fff;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ================= STAT CARDS ================= */
+.stat-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(34,41,47,0.06);
+}
+
+.icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1rem;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+    .icon-box i {
+        line-height: 1;
+    }
+
+/* Icon colors */
+.bg-purple {
+    background: #7367f0;
+}
+
+.bg-green {
+    background: #28c76f;
+}
+
+.bg-blue {
+    background: #00cfe8;
+}
+
+.bg-orange {
+    background: #ff9f43;
+}
+
+/* Card pastel backgrounds */
+.bg-light-purple {
+    background: #f3f0ff;
+}
+
+.bg-light-green {
+    background: #e8fdf5;
+}
+
+.bg-light-blue {
+    background: #eef6ff;
+}
+
+.bg-light-orange {
+    background: #fff5e6;
+}
+
+/* Trend badge */
+.badge-trend {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.badge-up {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge-down {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* ================= CHARTS ================= */
+.chart-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+}
+
+.chart-container {
+    height: 260px;
+    position: relative;
+}

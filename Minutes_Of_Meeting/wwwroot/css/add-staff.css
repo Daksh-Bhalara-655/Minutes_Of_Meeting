@@ -1,0 +1,111 @@
+﻿body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 40px 0;
+}
+
+/* Titles */
+.main-title {
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.sub-title {
+    color: #6c757d;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+}
+
+/* Card */
+.custom-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    background: #fff;
+    overflow: hidden;
+}
+
+.card-header-custom {
+    background: linear-gradient(90deg, #6f42c1, #563d7c);
+    color: #fff;
+    padding: 15px 25px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Forms */
+.form-label {
+    font-weight: 700;
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+}
+
+.input-group-text {
+    background: #f8f9fa;
+    border-right: none;
+}
+
+.form-control,
+.form-select {
+    border-left: none;
+}
+
+/* Focus */
+.input-group:focus-within {
+    box-shadow: 0 0 0 0.25rem rgba(111,66,193,0.25);
+    border-radius: .375rem;
+}
+
+/* Helper */
+.helper-text {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 4px;
+}
+
+/* Guidelines */
+.guidelines-box {
+    background: #dbeceb;
+    border: 1px solid #cedebd;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.guidelines-title {
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.guidelines-list {
+    padding-left: 22px;
+    margin-bottom: 0;
+}
+
+/* Buttons */
+.btn-primary-custom {
+    background: #593cc1;
+    border-color: #593cc1;
+    padding: 10px 25px;
+    font-weight: 600;
+    color: #fff;
+}
+
+    .btn-primary-custom:hover {
+        background: #462ea0;
+    }
+
+.back-link {
+    color: #6c757d;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+    .back-link:hover {
+        color: #333;
+    }

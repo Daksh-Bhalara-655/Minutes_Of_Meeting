@@ -1,0 +1,113 @@
+﻿@{
+    ViewData["Title"] = "Add New Staff Member";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <link rel="stylesheet" href="~/css/add-staff.css" />
+
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h4 class="main-title">Add New Staff Member</h4>
+                <p class="sub-title">Register a new staff member</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card custom-card">
+
+                    <div class="card-header-custom">
+                        <i class="bi bi-person-plus-fill"></i>
+                        Add New Staff Member
+                    </div>
+
+                    <div class="card-body p-4">
+                        <form>
+
+                            <div class="row g-4">
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Staff Name</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                        <input type="text" class="form-control" placeholder="Enter staff name">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Department</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-building"></i></span>
+                                        <select class="form-select">
+                                            <option selected>-- Select Department --</option>
+                                            <option>Operations</option>
+                                            <option>Finance</option>
+                                            <option>IT</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Email Address</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                        <input type="email" class="form-control" placeholder="Enter email address">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Mobile Number</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-phone"></i></span>
+                                        <input type="number" class="form-control" placeholder="Enter mobile number">
+                                    </div>
+                                    <div class="helper-text">Example: +91 98765 43210</div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="form-label">Remarks</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-chat-dots"></i></span>
+                                        <textarea class="form-control" rows="3"
+                                                  placeholder="Enter any additional remarks (optional)"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="guidelines-box">
+                                        <div class="guidelines-title">
+                                            <i class="bi bi-info-circle"></i>
+                                            Staff Member Guidelines
+                                        </div>
+                                        <ul class="guidelines-list">
+                                            <li>Email must be unique</li>
+                                            <li>Use official email</li>
+                                            <li>Include country code for mobile</li>
+                                            <li>Remarks can include role details</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mt-4 d-flex justify-content-end gap-3">
+                                    <a asp-controller="Staff" asp-action="Index" class="back-link">
+                                        <i class="bi bi-arrow-left"></i> Back to List
+                                    </a>
+                                    <button type="submit" class="btn btn-primary-custom">
+                                        <i class="bi bi-check-circle"></i>
+                                        Create Staff Member
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

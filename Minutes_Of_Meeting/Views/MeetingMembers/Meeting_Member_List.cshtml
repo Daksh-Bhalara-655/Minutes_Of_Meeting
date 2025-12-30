@@ -1,0 +1,55 @@
+@{
+    ViewData["Title"] = "Meeting Members";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/meeting-member.css" asp-append-version="true" />
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="main-title">Meeting Members</h4>
+        <a asp-controller="MeetingMembers" asp-action="Create" class="btn btn-gradient-primary">Add Member</a>
+    </div>
+
+    <div class="card custom-card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Meeting</th>
+                            <th>Staff</th>
+                            <th>Present</th>
+                            <th>Remarks</th>
+                            <th>Created</th>
+                            <th>Modified</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @* static data *@
+                        <tr>
+                            <td>1</td>
+                            <td>Project Kickoff</td>
+                            <td>John Doe</td>
+                            <td>Yes</td>
+                            <td>Attended and contributed</td>
+                            <td>2024-01-15</td>
+                            <td>2024-01-16</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Design Review</td>
+                            <td>Jane Smith</td>
+                            <td>No</td>
+                            <td>Absent due to illness</td>
+                            <td>2024-02-10</td>
+                            <td>2024-02-11</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

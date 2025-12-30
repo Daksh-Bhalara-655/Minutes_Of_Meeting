@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Login - Dzignex";
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Your CSS from wwwroot -->
+    <link rel="stylesheet" href="~/css/Login.css" />
+</head>
+<body>
+
+    <div class="blue-bg"></div>
+
+    <div class="login-container">
+        <h1 class="header-title"> Welcome Back</h1>
+
+        <form>
+            <div class="custom-input-group">
+                <i class="fas fa-user input-icon"></i>
+                <input type="text" placeholder="Username">
+            </div>
+
+            <div class="custom-input-group">
+                <i class="fas fa-lock input-icon"></i>
+                <input type="password" placeholder="Password">
+            </div>
+
+            <button type="button" class="btn btn-login">Login</button>
+
+            <a href="#" class="forgot-pass">Forgot your password?</a>
+        </form>
+
+        <div class="social-section">
+            <p class="social-text">or connect with</p>
+
+            <div class="d-flex justify-content-center flex-wrap gap-2">
+                <button class="btn btn-social btn-fb">
+                    <i class="fab fa-facebook-f"></i> Facebook
+                </button>
+
+                <button class="btn btn-social btn-tw">
+                    <i class="fab fa-twitter"></i> Twitter
+                </button>
+            </div>
+
+            <button type="button" class="google-auth-btn">
+                <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google">
+                Sign in with Google
+            </button>
+
+            <div class="signup-link">
+                Don't have an account? <a asp-action="Register">Sign up</a>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>

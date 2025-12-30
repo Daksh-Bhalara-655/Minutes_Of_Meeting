@@ -1,0 +1,268 @@
+﻿/* ================= ROOT ================= */
+.meeting-list-page {
+    --primary: #7367f0;
+    --success: #28c76f;
+    --warning: #ff9f43;
+    --danger: #ea5455;
+    --header-bg: rgba(115,103,240,.06);
+    --header-color: rgba(115,103,240,.66);
+    font-family: 'Poppins', sans-serif;
+    color: #5e5873;
+}
+
+    /* ================= BUTTONS ================= */
+    .meeting-list-page .btn-gradient-primary {
+        background: linear-gradient(45deg, #7367f0, #9e95f5);
+        border: none;
+        color: #fff;
+        padding: 10px 24px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(115,103,240,.4);
+    }
+
+        .meeting-list-page .btn-gradient-primary:hover {
+            transform: translateY(-2px);
+        }
+
+    .meeting-list-page .btn-outline-secondary-custom {
+        border: 1px solid #d8d6de;
+        background: #fff;
+        padding: 10px 20px;
+        border-radius: 8px;
+    }
+
+    /* ================= CARD ================= */
+    .meeting-list-page .card-modern {
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 24px rgba(34,41,47,.05);
+    }
+
+    .meeting-list-page .card-header-modern {
+        padding: 1.5rem;
+        border-bottom: 1px solid #ebe9f1;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* ================= FORM ================= */
+    .meeting-list-page .form-label {
+        font-size: .85rem;
+        font-weight: 500;
+    }
+
+    .meeting-list-page .form-control,
+    .meeting-list-page .form-select {
+        border-radius: 8px;
+        padding: .55rem 1rem;
+    }
+
+    /* ================= TABLE ================= */
+    .meeting-list-page .table-modern {
+        width: 100%;
+        border-spacing: 0 10px;
+        border-collapse: separate;
+    }
+
+        /* Themed table header: uses page primary color variables and centers labels */
+        .meeting-list-page .table-modern thead th {
+            background-color: var(--header-bg);
+            padding: .9rem 1.5rem;
+            text-transform: uppercase;
+            font-size: .75rem;
+            color: var(--header-color);
+            font-weight: 700;
+            letter-spacing: .6px;
+            border-bottom: 1px solid rgba(0,0,0,.04);
+            vertical-align: middle;
+            text-align: center; /* center header text for each column */
+        }
+
+        /* Ensure actions header aligns with right-aligned action buttons */
+        .meeting-list-page .table-modern th.text-end {
+            text-align: right;
+        }
+
+        /* Center the first column (row index) in both header and body */
+        .meeting-list-page .table-modern th:first-child,
+        .meeting-list-page .table-modern td:first-child {
+            text-align: center;
+            width: 5%;
+            padding-left: 1.25rem; /* keep spacing consistent */
+            padding-right: 1.25rem;
+        }
+
+        .meeting-list-page .table-modern tbody tr {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,.02);
+            transition: .2s;
+        }
+
+            .meeting-list-page .table-modern tbody tr:hover {
+                transform: translateY(-3px);
+            }
+
+        .meeting-list-page .table-modern td {
+            padding: 1.2rem 1.5rem;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+    /* ================= DATE BOX ================= */
+    .meeting-list-page .date-box {
+        width: 45px;
+        text-align: center;
+        background: #f3f3f3;
+        border-radius: 8px;
+        padding: 6px;
+    }
+
+        .meeting-list-page .date-box .month {
+            font-size: .6rem;
+            text-transform: uppercase;
+            color: #999;
+        }
+
+/* New: color variants for the date badge */
+.meeting-list-page .date-box .fw-bold.small {
+    font-size: 1.05rem;
+    line-height: 1;
+    color: #5e5873; /* default dark gray */
+}
+
+.meeting-list-page .date-box--primary { background: rgba(115,103,240,.12); }
+.meeting-list-page .date-box--success { background: rgba(40,199,111,.12); }
+.meeting-list-page .date-box--warning { background: rgba(255,159,67,.12); }
+.meeting-list-page .date-box--danger { background: rgba(234,84,85,.12); }
+
+.meeting-list-page .date-box--primary .fw-bold.small { color: #7367f0; }
+.meeting-list-page .date-box--success .fw-bold.small { color: #28c76f; }
+.meeting-list-page .date-box--warning .fw-bold.small { color: #ff9f43; }
+.meeting-list-page .date-box--danger .fw-bold.small { color: #ea5455; }
+
+.meeting-list-page .date-box--primary .month { color: rgba(115,103,240,.8); }
+.meeting-list-page .date-box--success .month { color: rgba(40,199,111,.8); }
+.meeting-list-page .date-box--warning .month { color: rgba(255,159,67,.8); }
+.meeting-list-page .date-box--danger .month { color: rgba(234,84,85,.8); }
+
+/* Slightly larger, more rounded date box for compact look */
+.meeting-list-page .date-box.rounded-lg { width: 52px; border-radius: 10px; padding: 8px; }
+
+    /* ================= AVATARS ================= */
+    .meeting-list-page .avatar-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .meeting-list-page .avatar,
+    .meeting-list-page .avatar-more {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        margin-left: -10px;
+    }
+
+        .meeting-list-page .avatar:first-child {
+            margin-left: 0;
+        }
+
+    .meeting-list-page .avatar-more {
+        background: #e0e0e0;
+        font-size: .7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* ================= BADGES ================= */
+    .meeting-list-page .badge-soft {
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: .75rem;
+        font-weight: 600;
+    }
+
+.badge-soft-primary {
+    background: rgba(115,103,240,.12);
+    color: var(--primary);
+}
+
+.badge-soft-success {
+    background: rgba(40,199,111,.12);
+    color: var(--success);
+}
+
+.badge-soft-warning {
+    background: rgba(255,159,67,.12);
+    color: var(--warning);
+}
+
+.badge-soft-danger {
+    background: rgba(234,84,85,.12);
+    color: var(--danger);
+}
+
+/* ================= ACTION ICONS ================= */
+.meeting-list-page .action-icon {
+    color: #b9b9c3;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+    .meeting-list-page .action-icon:hover {
+        color: var(--primary);
+        transform: scale(1.15);
+    }
+
+/* ================= ACTION BUTTONS (match other pages) ================= */
+.meeting-list-page .action-btn-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.meeting-list-page .action-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,.12);
+    transition: transform .15s ease, opacity .15s ease;
+}
+
+.meeting-list-page .action-btn:hover { transform: translateY(-2px); opacity: .95; }
+
+.meeting-list-page .action-btn.view { background-color: #0d6efd; }
+.meeting-list-page .action-btn.edit { background-color: #198754; }
+.meeting-list-page .action-btn.delete { background-color: #dc3545; }
+
+/* Ensure icons inside buttons size properly */
+.meeting-list-page .action-btn .bi,
+.meeting-list-page .action-btn .fas,
+.meeting-list-page .action-btn .far {
+    font-size: 1rem;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+    .meeting-list-page .table-modern thead {
+        display: none;
+    }
+
+    .meeting-list-page .table-modern tbody tr {
+        display: block;
+    }
+
+    .meeting-list-page .table-modern td {
+        display: block;
+        width: 100%;
+    }
+}

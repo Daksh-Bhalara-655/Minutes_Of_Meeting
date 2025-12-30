@@ -1,0 +1,375 @@
+﻿@* @{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Your CSS from wwwroot -->
+    <link rel="stylesheet" href="~/css//DashBord.css" />
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <div class="header-section mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>
+                <h4 class="fw-bold m-0">Dashboard</h4>
+                <p class="text-muted small m-0">Overview & Analytics</p>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-light btn-sm"><i class="fas fa-bell text-muted"></i></button>
+                <div class="d-flex align-items-center gap-2 border rounded-pill px-3 py-1 bg-white">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width:28px; height:28px; font-size: 0.8rem;">A</div>
+                    <small class="fw-bold" style="font-size:0.8rem;">Admin</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2">
+            <button class="btn btn-light btn-sm text-primary" onclick="window.location.reload()"><i class="fas fa-sync-alt"></i> Refresh</button>
+            <button class="btn btn-success btn-sm text-white"><i class="fas fa-download"></i> Export</button>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-3 col-sm-6">
+            <div class="stat-card bg-light-purple">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h3 class="fw-bold mb-0">14</h3>
+                        <div class="text-muted small">TOTAL MEETINGS</div>
+                    </div>
+                    <div class="icon-box" style="background-color: #7367f0; "><i class="fas fa-calendar"></i></div>
+                </div>
+                <span class="badge-trend badge-up"><i class="fas fa-arrow-up"></i> 12%</span>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="stat-card bg-light-green">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h3 class="fw-bold mb-0">1</h3>
+                        <div class="text-muted small">UPCOMING</div>
+                    </div>
+                    <div class="icon-box" style="background-color: #28c76f;"><i class="fas fa-clock"></i></div>
+                </div>
+                <span class="badge-trend badge-up"><i class="fas fa-arrow-up"></i> 8%</span>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="stat-card bg-light-blue">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h3 class="fw-bold mb-0">8</h3>
+                        <div class="text-muted small">COMPLETED</div>
+                    </div>
+                    <div class="icon-box" style="background-color: #00cfe8;"><i class="fas fa-check-circle"></i></div>
+                </div>
+                <span class="badge-trend badge-up"><i class="fas fa-arrow-up"></i> 15%</span>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="stat-card bg-light-orange">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h3 class="fw-bold mb-0">5</h3>
+                        <div class="text-muted small">CANCELLED</div>
+                    </div>
+                    <div class="icon-box" style="background-color: #ff9f43;"><i class="fas fa-times-circle"></i></div>
+                </div>
+                <span class="badge-trend badge-down"><i class="fas fa-arrow-down"></i> 3%</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3 flex-grow-1">
+        <div class="col-md-6 mb-3">
+            <div class="chart-card">
+                <div class="d-flex justify-content-between mb-2">
+                    <h6 class="fw-bold m-0">Meetings by Type</h6>
+                    <i class="fas fa-download text-muted small" style="cursor:pointer;"></i>
+                </div>
+                <div class="chart-container-wrapper">
+                    <canvas id="typeChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <div class="chart-card">
+                <div class="d-flex justify-content-between mb-2">
+                    <h6 class="fw-bold m-0">Meetings by Department</h6>
+                    <i class="fas fa-download text-muted small" style="cursor:pointer;"></i>
+                </div>
+                <div class="chart-container-wrapper">
+                    <canvas id="deptChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // --- 1. Donut Chart (Meetings by Type) ---
+            const ctxType = document.getElementById('typeChart').getContext('2d');
+            new Chart(ctxType, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Board', 'Review', 'Client', 'Training'],
+                    datasets: [{
+                        data: [35, 25, 20, 20],
+                        backgroundColor: ['#7367f0', '#28c76f', '#00cfe8', '#ff9f43'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'right', labels: { boxWidth: 10, font: {size: 10} } }
+                    },
+                    cutout: '75%'
+                }
+            });
+
+            // --- 2. Bar Chart (Meetings by Department) ---
+            const ctxDept = document.getElementById('deptChart').getContext('2d');
+            new Chart(ctxDept, {
+                type: 'bar',
+                data: {
+                    labels: ['HR', 'IT', 'Sales', 'Mkt', 'Fin'],
+                    datasets: [{
+                        label: 'Meetings',
+                        data: [12, 19, 8, 15, 5],
+                        backgroundColor: '#7367f0',
+                        borderRadius: 4,
+                        barThickness: 25
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, grid: { borderDash: [5, 5] }, ticks: { font: {size: 10} } },
+                        x: { grid: { display: false }, ticks: { font: {size: 10} } }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        });
+    </script>
+}
+
+</body> *@
+
+
+
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="~/css/DashBord.css" />
+
+<div class="dashboard-container">
+
+    <!-- ================= HEADER ================= -->
+    <div class="header-section mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>
+                <h4 class="fw-bold m-0">Dashboard</h4>
+                <p class="text-muted small m-0">Overview & Analytics</p>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-light btn-sm">
+                    <i class="fas fa-bell text-muted"></i>
+                </button>
+
+                <div class="d-flex align-items-center gap-2 border rounded-pill px-3 py-1 bg-white">
+                    <div class="avatar-circle">A</div>
+                    <small class="fw-bold">Admin</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2">
+            <button class="btn btn-light btn-sm text-primary" onclick="window.location.reload()">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+            <button class="btn btn-success btn-sm text-white">
+                <i class="fas fa-download"></i> Export
+            </button>
+        </div>
+    </div>
+
+    <!-- ================= STATS ================= -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-3 col-sm-6">
+            <div class="stat-card bg-light-purple">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h3 class="fw-bold mb-0">14</h3>
+                        <div class="text-muted small">TOTAL MEETINGS</div>
+                    </div>
+                    <div class="icon-box bg-purple">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                </div>
+                <span class="badge-trend badge-up">
+                    <i class="fas fa-arrow-up"></i> 12%
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="stat-card bg-light-green">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h3 class="fw-bold mb-0">1</h3>
+                        <div class="text-muted small">UPCOMING</div>
+                    </div>
+                    <div class="icon-box bg-green">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                </div>
+                <span class="badge-trend badge-up">
+                    <i class="fas fa-arrow-up"></i> 8%
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="stat-card bg-light-blue">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h3 class="fw-bold mb-0">8</h3>
+                        <div class="text-muted small">COMPLETED</div>
+                    </div>
+                    <div class="icon-box bg-blue">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+                <span class="badge-trend badge-up">
+                    <i class="fas fa-arrow-up"></i> 15%
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="stat-card bg-light-orange">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h3 class="fw-bold mb-0">5</h3>
+                        <div class="text-muted small">CANCELLED</div>
+                    </div>
+                    <div class="icon-box bg-orange">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                </div>
+                <span class="badge-trend badge-down">
+                    <i class="fas fa-arrow-down"></i> 3%
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= CHARTS ================= -->
+    <div class="row g-3">
+
+        <div class="col-md-6">
+            <div class="chart-card">
+                <div class="d-flex justify-content-between mb-2">
+                    <h6 class="fw-bold m-0">Meetings by Type</h6>
+                    <i class="fas fa-download text-muted"></i>
+                </div>
+                <div class="chart-container">
+                    <canvas id="typeChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="chart-card">
+                <div class="d-flex justify-content-between mb-2">
+                    <h6 class="fw-bold m-0">Meetings by Department</h6>
+                    <i class="fas fa-download text-muted"></i>
+                </div>
+                <div class="chart-container">
+                    <canvas id="deptChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            new Chart(document.getElementById('typeChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Board', 'Review', 'Client', 'Training'],
+                    datasets: [{
+                        data: [35, 25, 20, 20],
+                        backgroundColor: ['#7367f0', '#28c76f', '#00cfe8', '#ff9f43'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    cutout: '75%',
+                    plugins: { legend: { position: 'right' } }
+                }
+            });
+
+            new Chart(document.getElementById('deptChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['HR', 'IT', 'Sales', 'Mkt', 'Fin'],
+                    datasets: [{
+                        data: [12, 19, 8, 15, 5],
+                        backgroundColor: '#7367f0',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+
+        });
+    </script>
+}

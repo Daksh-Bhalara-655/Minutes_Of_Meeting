@@ -1,0 +1,198 @@
+﻿@{
+    ViewData["Title"] = "Meetings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/meetinglist.css" asp-append-version="true" />
+
+<div class="meeting-list-page container-fluid py-5 px-4">
+
+    <!-- ================= HEADER ================= -->
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h2 class="fw-bold text-dark m-0">Meetings</h2>
+            <p class="text-muted m-0">Manage your schedule and minutes</p>
+        </div>
+
+        <div class="d-flex gap-3">
+            <button class="btn btn-outline-secondary-custom">
+                <i class="fas fa-file-export me-2"></i>Export
+            </button>
+
+            <a asp-controller="Meetings" asp-action="Create"
+               class="btn btn-gradient-primary">
+                <i class="fas fa-plus me-2"></i>Schedule Meeting
+            </a>
+        </div>
+    </div>
+
+    <!-- ================= FILTER CARD ================= -->
+    <div class="card-modern">
+        <div class="card-header-modern">
+            <h5 class="card-title">
+                <i class="fas fa-filter me-2 text-primary"></i>
+                Filter & Search
+            </h5>
+            <a href="#" class="text-muted small text-decoration-none">Clear all</a>
+        </div>
+
+        <div class="p-4">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">Type</label>
+                    <select class="form-select">
+                        <option>All Types</option>
+                        <option>Board Meeting</option>
+                        <option>Workshop</option>
+                        <option>Technical</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Status</label>
+                    <select class="form-select">
+                        <option>Any Status</option>
+                        <option>Upcoming</option>
+                        <option>Completed</option>
+                        <option>Pending</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <label class="form-label">Date</label>
+                    <input type="date" class="form-control" />
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Search</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0">
+                            <i class="fas fa-search text-muted"></i>
+                        </span>
+                        <input type="text"
+                               id="searchInput"
+                               class="form-control border-start-0 ps-0"
+                               placeholder="Search by topic or venue..." />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= TABLE ================= -->
+    <div class="mt-4">
+        <table class="table-modern" id="meetingsTable">
+            <thead>
+                <tr>
+                    <th width="5%">#</th>
+                    <th width="22%">Date & Topic</th>
+                    <th width="15%">Type</th>
+                    <th width="15%">Department</th>
+                    <th width="15%">Attendees</th>
+                    <th width="15%">Status</th>
+                    <th width="13%" class="text-center">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <!-- ROW -->
+                <tr>
+                    <td class="fw-bold text-muted">14</td>
+
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="date-box me-3">
+                                <div class="fw-bold small">23</div>
+                                <div class="month">Nov</div>
+                            </div>
+                            <div>
+                                <div class="fw-bold">Q4 Strategy Review</div>
+                                <div class="small text-muted">10:00 AM – 11:30 AM</div>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td><span class="badge-soft badge-soft-primary">Board</span></td>
+                    <td class="text-muted">Executive</td>
+
+                    <td>
+                        <div class="avatar-group">
+                            <img src="https://i.pravatar.cc/150?img=1" class="avatar" />
+                            <img src="https://i.pravatar.cc/150?img=5" class="avatar" />
+                            <img src="https://i.pravatar.cc/150?img=8" class="avatar" />
+                        </div>
+                    </td>
+
+                    <td><span class="badge-soft badge-soft-success">Completed</span></td>
+
+                    <td class="text-end">
+                        <div class="action-btn-group">
+                            <a href="#" class="action-btn view" title="View"><i class="bi bi-eye"></i></a>
+                            <a asp-controller="Meetings" asp-action="Create" class="action-btn edit" title="Edit"><i class="bi bi-pencil"></i></a>
+                            <a href="#" class="action-btn delete" title="Delete"><i class="bi bi-trash"></i></a>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- ROW -->
+                <tr>
+                    <td class="fw-bold text-muted">13</td>
+
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="date-box me-3">
+                                <div class="fw-bold small">27</div>
+                                <div class="month">Nov</div>
+                            </div>
+                            <div>
+                                <div class="fw-bold">Creative Brainstorm</div>
+                                <div class="small text-muted">02:00 PM – 04:00 PM</div>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td><span class="badge-soft badge-soft-warning">Workshop</span></td>
+                    <td class="text-muted">Marketing</td>
+
+                    <td>
+                        <div class="avatar-group">
+                            <img src="https://i.pravatar.cc/150?img=32" class="avatar" />
+                            <img src="https://i.pravatar.cc/150?img=12" class="avatar" />
+                            <div class="avatar-more">+3</div>
+                        </div>
+                    </td>
+
+                    <td><span class="badge-soft badge-soft-danger">Pending</span></td>
+
+                    <td class="text-end">
+                        <div class="action-btn-group">
+                            <a href="#" class="action-btn view" title="View"><i class="bi bi-eye"></i></a>
+                            <a asp-controller="Meetings" asp-action="Create" class="action-btn edit" title="Edit"><i class="bi bi-pencil"></i></a>
+                            <a href="#" class="action-btn delete" title="Delete"><i class="bi bi-trash"></i></a>
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            const input = document.getElementById('searchInput');
+            if (!input) return;
+
+            input.addEventListener('keyup', function () {
+                const value = this.value.toLowerCase();
+                document.querySelectorAll('#meetingsTable tbody tr')
+                    .forEach(row => {
+                        row.style.display = row.innerText.toLowerCase().includes(value)
+                            ? '' : 'none';
+                    });
+            });
+        })();
+    </script>
+}

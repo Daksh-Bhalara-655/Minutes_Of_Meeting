@@ -1,0 +1,105 @@
+﻿@{
+    ViewData["Title"] = "Meeting Types";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <link rel="stylesheet" href="~/css/meeting-type-list.css" asp-append-version="true" />
+
+
+<div class="container py-4">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="main-title">Meeting Types</h4>
+            <p class="sub-title">Manage meeting types</p>
+        </div>
+        <a asp-controller="MeetingTypes"
+           asp-action="Create"
+           class="btn btn-primary-custom">
+            <i class="bi bi-plus-circle"></i> Add Meeting Type
+        </a>
+    </div>
+
+    <!-- CARD -->
+    <div class="card custom-card">
+
+        <div class="card-header-custom">
+            <i class="bi bi-calendar-event"></i>
+            Meeting Type List
+        </div>
+
+        <div class="table-responsive">
+            <table class="table align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Meeting Type Name</th>
+                        <th>Remarks</th>
+                        <th>Created</th>
+                        <th>Modified</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Weekly Review</td>
+                        <td>Regular team sync-up</td>
+                        <td>2025-01-10</td>
+                        <td>2025-01-18</td>
+                        <td class="text-end">
+                            <div class="action-btn-group">
+                                <a class="action-btn view" title="View">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a asp-controller="MeetingTypes" asp-action="Create" class="action-btn edit" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a class="action-btn delete" title="Delete">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>Client Meeting</td>
+                        <td>External client discussion</td>
+                        <td>2025-01-12</td>
+                        <td>
+                            2025-01-20
+                        </td>
+                        <td class="text-end">
+                            <div class="action-btn-group">
+                                <a class="action-btn view"><i class="bi bi-eye"></i></a>
+                                <a asp-controller="MeetingTypes" asp-action="Create" class="action-btn edit"><i class="bi bi-pencil"></i></a>
+                                <a class="action-btn delete"><i class="bi bi-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>3</td>
+                        <td>Board Meeting</td>
+                        <td>Management level meeting</td>
+                        <td>2025-01-15</td>
+                        <td>2025-01-22</td>
+                        <td class="text-end">
+                            <div class="action-btn-group">
+                                <a class="action-btn view"><i class="bi bi-eye"></i></a>
+                                <a asp-controller="MeetingTypes" asp-action="Create" class="action-btn edit"><i class="bi bi-pencil"></i></a>
+                                <a class="action-btn delete"><i class="bi bi-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>

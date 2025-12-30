@@ -1,0 +1,122 @@
+.staff-list-page {
+    font-family: 'Poppins', sans-serif;
+    color: #5e5873;
+}
+
+/* Buttons */
+.btn-primary-gradient {
+    background: linear-gradient(90deg,#7d4af4,#6130ca);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+}
+
+.btn-success-gradient {
+    background: linear-gradient(90deg,#22c55e,#15803d);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+}
+
+/* Cards */
+.card-modern {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 6px 24px rgba(0,0,0,.08);
+}
+
+.card-header-modern {
+    background: linear-gradient(90deg,#7d4af4,#6130ca);
+    color: white;
+    padding: 16px 20px;
+}
+
+/* Table */
+.table thead th {
+    background: #f8f7ff;
+    font-weight: 600;
+    border-bottom: 2px solid #e6e2ff;
+}
+
+.table tbody tr:hover {
+    background: #f6f4ff;
+}
+
+/* Avatar */
+.avatar-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(90deg,#7d4af4,#6130ca);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+/* Badges */
+.badge {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: .75rem;
+}
+
+.badge-info {
+    background: #06b6d4;
+    color: white;
+}
+
+.bg-purple {
+    background: #6d28d9 !important;
+    color: white;
+}
+
+.bg-success {
+    background: #16a34a !important;
+    color: white;
+}
+
+/* Actions */
+.action-btn-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.action-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 3px 10px rgba(0,0,0,.15);
+}
+
+.action-view {
+    background: #2563eb;
+}
+
+.action-schedule {
+    background: #10b981;
+}
+
+.action-edit {
+    background: #198754;
+}
+
+.action-delete {
+    background: #ef4444;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .action-btn-group {
+        justify-content: flex-start;
+    }
+}

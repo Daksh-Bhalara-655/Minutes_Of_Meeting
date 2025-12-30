@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Add Meeting Venue";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <link rel="stylesheet" href="~/css/create-meeting-venue.css" asp-append-version="true" />
+
+
+<div class="container py-4">
+
+    <!-- HEADER -->
+    <div class="mb-4">
+        <h4 class="main-title">Add Meeting Venue</h4>
+        <p class="sub-title">Create a new meeting venue</p>
+    </div>
+
+    <!-- CARD -->
+    <div class="card custom-card">
+
+        <div class="card-header-custom">
+            <i class="bi bi-geo-alt-fill"></i>
+            Meeting Venue Details
+        </div>
+
+        <div class="card-body p-4">
+
+            <form method="post">
+
+                <div class="row g-4">
+
+                    <!-- Meeting Venue Name -->
+                    <div class="col-md-6">
+                        <label class="form-label">Meeting Venue Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-building"></i>
+                            </span>
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Enter meeting venue name"
+                                   required />
+                        </div>
+                    </div>
+
+                    <!-- Guidelines -->
+                    <div class="col-12">
+                        <div class="guidelines-box">
+                            <div class="guidelines-title">
+                                <i class="bi bi-info-circle"></i>
+                                Guidelines
+                            </div>
+                            <ul class="guidelines-list">
+                                <li>Meeting venue name must be unique</li>
+                                <li>Use clear and identifiable venue names</li>
+                                <li>Example: Board Room, Conference Hall, Online</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="col-12 d-flex justify-content-end gap-3 mt-3">
+                        <a asp-controller="MeetingVenue"
+                           asp-action="Index"
+                           class="back-link">
+                            <i class="bi bi-arrow-left"></i> Back to List
+                        </a>
+
+                        <button type="submit" class="btn btn-primary-custom">
+                            <i class="bi bi-check-circle"></i> Save Meeting Venue
+                        </button>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>

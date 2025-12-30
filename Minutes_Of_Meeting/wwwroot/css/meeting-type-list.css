@@ -1,0 +1,90 @@
+﻿body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Titles */
+.main-title {
+    font-weight: 700;
+}
+
+.sub-title {
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+
+/* Card */
+.custom-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.card-header-custom {
+    background: linear-gradient(90deg, #6f42c1, #563d7c);
+    color: white;
+    padding: 15px 25px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Table */
+.table thead th {
+    background-color: #f3f0ff;
+    font-weight: 600;
+    border-bottom: 2px solid #e2dbff;
+}
+
+.table tbody tr:hover {
+    background-color: #f7f5ff;
+}
+
+/* Buttons */
+.btn-primary-custom {
+    background-color: #593cc1;
+    border-color: #593cc1;
+    color: white;
+    font-weight: 600;
+}
+
+    .btn-primary-custom:hover {
+        background-color: #462ea0;
+    }
+
+/* Action Buttons */
+.action-btn-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.action-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+    .action-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .action-btn.view {
+        background-color: #0d6efd;
+    }
+
+    .action-btn.edit {
+        background-color: #198754; /* changed to match department list green */
+    }
+
+    .action-btn.delete {
+        background-color: #dc3545;
+    }

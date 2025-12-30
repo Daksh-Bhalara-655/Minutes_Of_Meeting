@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Meeting Venues";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <link rel="stylesheet" href="~/css/meeting-venue-list.css" asp-append-version="true" />
+
+
+<div class="container py-4">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="main-title">Meeting Venues</h4>
+            <p class="sub-title">Manage meeting venues</p>
+        </div>
+
+        <a asp-controller="MeetingVenue"
+           asp-action="Create"
+           class="btn btn-primary-custom">
+            <i class="bi bi-plus-circle"></i> Add Meeting Venue
+        </a>
+    </div>
+
+    <!-- CARD -->
+    <div class="card custom-card">
+
+        <div class="card-header-custom">
+            <i class="bi bi-geo-alt-fill"></i>
+            Meeting Venue List
+        </div>
+
+        <div class="table-responsive">
+            <table class="table align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Meeting Venue Name</th>
+                        <th>Created</th>
+                        <th>Modified</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Main Conference Hall</td>
+                        <td>2025-01-10</td>
+                        <td>
+                            2025-01-20
+                        </td>
+                        <td class="text-end">
+                            <div class="action-btn-group">
+                                <a class="action-btn view" title="View">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a asp-controller="MeetingVenue" asp-action="Create" class="action-btn edit" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a class="action-btn delete" title="Delete">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>Board Room</td>
+                        <td>2025-01-12</td>
+                        <td>2025-01-22</td>
+                        <td class="text-end">
+                            <div class="action-btn-group">
+                                <a class="action-btn view"><i class="bi bi-eye"></i></a>
+                                <a asp-controller="MeetingVenue" asp-action="Create" class="action-btn edit"><i class="bi bi-pencil"></i></a>
+                                <a class="action-btn delete"><i class="bi bi-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>3</td>
+                        <td>Online (Microsoft Teams)</td>
+                        <td>2025-01-15</td>
+                        <td>2025-01-25</td>
+                        <td class="text-end">
+                            <div class="action-btn-group">
+                                <a class="action-btn view"><i class="bi bi-eye"></i></a>
+                                <a asp-controller="MeetingVenue" asp-action="Create" class="action-btn edit"><i class="bi bi-pencil"></i></a>
+                                <a class="action-btn delete"><i class="bi bi-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>

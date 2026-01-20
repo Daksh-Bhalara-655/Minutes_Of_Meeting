@@ -8,5 +8,6 @@ namespace Minutes_Of_Meeting.Controllers
         {
             return View("Meeting_Attendance");
         }
+
     }
 }

@@ -1,12 +1,18 @@
-﻿namespace Minutes_Of_Meeting.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Minutes_Of_Meeting.Models
 {
     public class MeetingMembers
     {
+        [Key]
         public int Meeting_Member_Id { get; set; }
 
+        [Key]
         public int Meeting_Id { get; set; }
 
+        [Key]
         public int Staff_Id { get; set; }
+
 
         public bool Is_Present { get; set; }
 

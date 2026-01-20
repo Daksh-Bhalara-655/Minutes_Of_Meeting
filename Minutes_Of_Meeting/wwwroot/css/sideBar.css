@@ -8,6 +8,7 @@
     --sidebar-width: 260px;
     --sidebar-bg: #181726;
     --sidebar-text: #b0b3b8;
+    --footer-height: 64px;
 }
 
 /* Page baseline */
@@ -56,6 +57,7 @@ html, body {
     overflow-y: auto;          /* single scrollbar lives here */
     -webkit-overflow-scrolling: touch;
     padding: 28px 36px;
+    padding-bottom: calc(var(--footer-height) + 20px); /* reserve footer space */
     box-sizing: border-box;
 }
 
@@ -88,13 +90,48 @@ html, body {
     text-decoration: none;
 }
 
+/* Make the logo container a larger rounded white box so the logo shows clearly */
 .brand-icon {
-    background: rgba(255,255,255,0.06);
-    padding: 8px;
-    border-radius: 8px;
+    width: 80px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #ffffff; /* white box */
+    border-radius: 18px; /* rounded square */
+    overflow: hidden;
+    padding: 12px;
+    box-sizing: border-box;
+    box-shadow: 0 8px 24px rgba(2,6,23,0.08);
+}
+
+.brand-icon img {
+    width: 100px; /* larger visible logo */
+    height: 100px;
+    object-fit: contain;
+    display: block;
+}
+
+/* If a secondary logo element exists, keep it small and aligned to the right */
+.brand-sublogo {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.brand-sublogo img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+@media (max-width: 480px) {
+    .sidebar .brand { padding: 14px 12px; }
+    .brand-icon { width: 64px; height: 64px; padding: 10px; border-radius: 14px; }
+    .brand-icon img { width: 48px; height: 48px; }
+    .brand-sublogo img { width: 28px; height: 28px; }
 }
 
 /* Menu container */
@@ -281,6 +318,7 @@ body.sidebar-collapsed .menu-btn {
     overflow-y: auto;          /* single scrollbar lives here */
     -webkit-overflow-scrolling: touch;
     padding: 28px 36px;
+    padding-bottom: calc(var(--footer-height) + 20px); /* reserve footer space */
     box-sizing: border-box;
     transition: margin-left 220ms ease;
 }
@@ -316,4 +354,38 @@ body.sidebar-collapsed .content-area-wrapper {
   .filter(el => el.scrollHeight > el.clientHeight)
   .map(e => ({ tag: e.tagName.toLowerCase(), cls: e.className, id: e.id, scroll: e.scrollHeight, client: e.clientHeight }))
   .slice(0,10)[0]     
-*/
+
+/* Footer styles for layout */
+.site-footer {
+    position: fixed;
+    bottom: 0;
+    left: var(--sidebar-width);
+    right: 0;
+    height: var(--footer-height);
+    background: linear-gradient(90deg, rgba(0,0,0,0.35), rgba(0,0,0,0.2));
+    color: #e6eef8;
+    padding: 12px 24px;
+    z-index: 1200;
+    transition: left 220ms ease; /* smooth move when sidebar toggles */
+    display: flex;
+    align-items: center;
+}
+
+/* When sidebar is collapsed, align footer to very left */
+body.sidebar-collapsed .site-footer {
+    left: 0 !important;
+}
+
+.site-footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.site-footer .small { opacity: 0.8; font-size: 0.9rem; }
+
+@media (max-width: 768px) {
+    .site-footer { left: 0; }
+    .site-footer-inner { flex-direction: column; gap: 6px; text-align: center; }
+}

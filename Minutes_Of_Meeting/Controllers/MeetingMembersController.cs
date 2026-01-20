@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Minutes_Of_Meeting.Models;
 using System;
 using System.Collections.Generic;
 
@@ -20,11 +21,20 @@ namespace Minutes_Of_Meeting.Controllers
         // GET: /MeetingMembers/Create
         public IActionResult Create()
         {
-            // sample select data - replace with DB calls
         
             return View("Create_Meeting_Member");
         }
 
-        
+        public IActionResult Save(MeetingMembers model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View("Create_Meeting_Member", model);
+            }
+
+            return View("Meeting_Member_List");
+        }
+
+
     }
 }

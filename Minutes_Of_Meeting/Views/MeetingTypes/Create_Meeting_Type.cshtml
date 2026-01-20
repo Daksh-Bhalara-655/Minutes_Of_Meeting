@@ -2,7 +2,7 @@
     ViewData["Title"] = "Add Meeting Type";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@model Minutes_Of_Meeting.Models.MeetingTypeModel;
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="~/css/add-meeting-type.css" />
@@ -25,19 +25,20 @@
             </div>
 
             <div class="card-body p-4">
-                <form>
+                <form asp-action="Create" action="post">
 
                     <!-- Meeting Type Name -->
                     <div class="mb-4">
-                        <label class="form-label">Meeting Type Name</label>
+                        <label asp-for="Meeting_Type_Name" class="form-label">Meeting Type Name</label>
                         <div class="input-group">
                             <span class="input-group-text border-end-0">
                                 <i class="bi bi-tag-fill"></i>
                             </span>
-                            <input type="text"
+                            <input asp-for="Meeting_Type_Name" type="text"
                                    class="form-control border-start-0"
                                    placeholder="Enter meeting type name">
                         </div>
+                    <span asp-validation-for="Meeting_Type_Name" class="text-danger"></span>
                     </div>
 
                     <!-- Remarks -->

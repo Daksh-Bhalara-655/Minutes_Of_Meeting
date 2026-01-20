@@ -2,8 +2,7 @@
     ViewData["Title"] = "Add Meeting Venue";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
+@model Minutes_Of_Meeting.Models.MeetingVenue;
     <link rel="stylesheet" href="~/css/create-meeting-venue.css" asp-append-version="true" />
 
 
@@ -25,22 +24,23 @@
 
         <div class="card-body p-4">
 
-            <form method="post">
+            <form asp-action="Create" method="post">
 
                 <div class="row g-4">
 
                     <!-- Meeting Venue Name -->
                     <div class="col-md-6">
-                        <label class="form-label">Meeting Venue Name</label>
+                        <label asp-for="Meeting_Venue_Name" class="form-label">Meeting Venue Name</label>
                         <div class="input-group">
                             <span class="input-group-text">
                                 <i class="bi bi-building"></i>
                             </span>
-                            <input type="text"
+                            <input asp-for="Meeting_Venue_Name" type="text"
                                    class="form-control"
                                    placeholder="Enter meeting venue name"
                                    required />
                         </div>
+                        <span asp-validation-for="Meeting_Venue_Name" class="text-danger"></span>
                     </div>
 
                     <!-- Guidelines -->

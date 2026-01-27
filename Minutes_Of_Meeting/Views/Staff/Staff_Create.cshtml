@@ -2,6 +2,7 @@
     ViewData["Title"] = "Add New Staff Member";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model Minutes_Of_Meeting.Models.Staff
 
 
     <link rel="stylesheet" href="~/css/add-staff.css" />
@@ -26,20 +27,21 @@
                     </div>
 
                     <div class="card-body p-4">
-                        <form>
+                        <form asp-action="Save" method="post">
 
                             <div class="row g-4">
 
                                 <div class="col-md-6">
-                                    <label class="form-label">Staff Name</label>
+                                    <label asp-for="Staff_Name" class="form-label">Staff Name</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-person"></i></span>
                                         <input type="text" class="form-control" placeholder="Enter staff name">
                                     </div>
+                                <span asp-validation-for="Staff_Name" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="form-label">Department</label>
+                                    <label asp-for="Department_Id" class="form-label">Department</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-building"></i></span>
                                         <select class="form-select">
@@ -49,14 +51,16 @@
                                             <option>IT</option>
                                         </select>
                                     </div>
+                                <span asp-validation-for="Department_Id" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="form-label">Email Address</label>
+                                    <label asp-for="Email_Address" class="form-label">Email Address</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-envelope"></i></span>
                                         <input type="email" class="form-control" placeholder="Enter email address">
                                     </div>
+                                <span asp-validation-for="Email_Address" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-md-6">

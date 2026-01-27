@@ -5,7 +5,6 @@ namespace Minutes_Of_Meeting.Models
     public class DepartmentModel
     {
         [Key]
-        //[Required(ErrorMessage = "Department ID is required")]
         public int Department_Id { get; set; }
 
         [Required(ErrorMessage = "Department Name is required")]

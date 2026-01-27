@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Minutes_Of_Meeting.Models;
 
 namespace Minutes_Of_Meeting.Controllers
 {
@@ -13,6 +14,16 @@ namespace Minutes_Of_Meeting.Controllers
         {
             // add new staff 
             return View("Staff_Create");
+        }
+
+        public IActionResult Save(Staff model)
+        {
+            if (!ModelState.IsValid)
+            {
+                
+                return View("Staff_Create");
+            }
+            return View("Staff_List");
         }
 
     }

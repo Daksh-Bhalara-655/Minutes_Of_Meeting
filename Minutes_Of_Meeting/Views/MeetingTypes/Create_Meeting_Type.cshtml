@@ -1,8 +1,8 @@
-﻿@{
+﻿@model Minutes_Of_Meeting.Models.MeetingTypeModel;
+@{
     ViewData["Title"] = "Add Meeting Type";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model Minutes_Of_Meeting.Models.MeetingTypeModel;
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="~/css/add-meeting-type.css" />
@@ -25,7 +25,7 @@
             </div>
 
             <div class="card-body p-4">
-                <form asp-action="Create" action="post">
+            <form asp-action="Save" method="post">
 
                     <!-- Meeting Type Name -->
                     <div class="mb-4">

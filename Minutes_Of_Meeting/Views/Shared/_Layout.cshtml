@@ -56,6 +56,9 @@
                 <a asp-controller="Meetings" asp-action="Index" class="nav-link @(navActive("Meetings","Index"))">
                     <i class="fas fa-calendar-alt"></i> All Meetings
                 </a>
+                <a asp-controller="MeetingMembers" asp-action="Index" class="nav-link @(navActive("Meetings", "Create"))">
+                    <i class="fas fa-plus-circle"></i>  Meeting Member List
+                </a>
                 <a asp-controller="Meetings" asp-action="Create" class="nav-link @(navActive("Meetings","Create"))">
                     <i class="fas fa-plus-circle"></i> Schedule Meeting
                 </a>
@@ -86,7 +89,7 @@
                 <div class="small">Owner: Sanajay Bhalara</div>
             </div>
             <div class="footer-right text-end">
-                <div>Mobile: <a href="tel:+917021248131">7021248131</a></div>
+                <div>Mobile: <a style="text-decoration:none" href="tel:+917021248131">7021248131</a></div>
                 <div class="small">Since 2010</div>
             </div>
         </div>

@@ -680,3 +680,27 @@ body::-webkit-scrollbar-thumb,
     height: 260px;
     position: relative;
 }
+
+
+/* Ensure the dashboard can grow without breaking the layout */
+.dashboard-container {
+    height: auto;
+    min-height: 100vh;
+    padding-bottom: 40px;
+}
+
+/* Fix for chart containers to be uniform */
+.chart-container {
+    height: 300px; /* Increased slightly for better visibility */
+    position: relative;
+    width: 100%;
+}
+
+/* Hover effect for cards */
+.chart-card {
+    transition: transform 0.2s ease;
+}
+
+    .chart-card:hover {
+        transform: translateY(-2px);
+    }

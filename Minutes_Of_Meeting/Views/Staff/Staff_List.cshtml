@@ -1,13 +1,20 @@
-﻿@{
+﻿@model IEnumerable<Minutes_Of_Meeting.Models.Staff>
+@{
     ViewData["Title"] = "Staff Members";
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    int count_Staff = 0;
+    foreach (var staff in Model)
+    {
+        count_Staff++;
+    }
 }
 
 <link rel="stylesheet" href="~/css/staff-list.css" asp-append-version="true" />
 
 <div class="staff-list-page container-fluid py-5 px-4">
 
-    <!-- ================= HEADER ================= -->
     <div class="row mb-5 align-items-center">
         <div class="col-md-6">
             <h2 class="fw-bold m-0">Staff Members</h2>
@@ -23,17 +30,16 @@
         </div>
     </div>
 
-    <!-- ================= FILTER ================= -->
     <div class="card-modern p-4 mb-4">
         <div class="row g-3 align-items-end">
             <div class="col-md-2">
                 <label class="form-label">Department</label>
-                <select class="form-select">
-                    <option>All Departments</option>
-                    <option>Operations</option>
-                    <option>Customer Service</option>
+                <select id="departmentFilter" class="form-select" asp-items="ViewBag.DepartmentList">
+                    <option value="">All Departments</option>
+
                 </select>
             </div>
+
 
             <div class="col-md-4">
                 <label class="form-label">Search</label>
@@ -48,12 +54,11 @@
             <div class="col-md-auto ms-auto d-flex align-items-center gap-3">
                 <a class="text-primary text-decoration-none fw-semibold">Search</a>
                 <a class="text-muted text-decoration-none">Clear</a>
-                <span class="text-muted">Total: <strong id="staffCount">3</strong></span>
+                <span class="text-muted">Total: <strong id="staffCount">@count_Staff</strong></span>
             </div>
         </div>
     </div>
 
-    <!-- ================= TABLE ================= -->
     <div class="card-modern p-0">
         <div class="card-header-modern">
             <h5 class="m-0">
@@ -69,64 +74,49 @@
                         <th>Staff Name</th>
                         <th>Department</th>
                         <th>Email Address</th>
-                        <th class="text-center">Total Meetings</th>
-                        <th class="text-center">Attendance Rate</th>
                         <th>Created Date</th>
                         <th class="text-end">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    <!-- ROW -->
-                    <tr>
-                        <td>14</td>
-                        <td>
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="avatar-circle">AW</div>
-                                <strong>Amanda White</strong>
-                            </div>
-                        </td>
-                        <td><span class="badge badge-info">Operations</span></td>
-                        <td>
-                            <i class="bi bi-envelope me-1"></i>
-                            amanda.w@company.com
-                        </td>
-                        <td class="text-center"><span class="badge bg-purple">0</span></td>
-                        <td class="text-center"><span class="badge bg-success">0.0%</span></td>
-                        <td>2025-11-20</td>
-                        <td class="text-end">
-                            <div class="action-btn-group">
-                                <a class="action-btn action-view"><i class="bi bi-eye"></i></a>
-                                <a class="action-btn action-schedule"><i class="bi bi-calendar-check"></i></a>
-                                <a asp-controller="Staff" asp-action="Create" class="action-btn action-edit"><i class="bi bi-pencil"></i></a>
-                                <a class="action-btn action-delete"><i class="bi bi-trash"></i></a>
-                            </div>
-                        </td>
-                    </tr>
+                    @if(Model != null && Model.Any())
+                    {
+                    @foreach(var staff in Model)
+                    {
+                        <tr>
+                            <td>@staff.StaffID</td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <strong>@staff.StaffName</strong>
+                                </div>
+                            </td>
+                            <td><span class="badge badge-info">@staff.DepartmentName</span></td>
+                            <td>
+                                <i class="bi bi-envelope me-1"></i>
+                                @staff.EmailAddress
+                            </td>
+                            <td>@staff.Created.ToString("yyyy-MM-dd")</td>
+                                <td class="text-end">
+                                    <div class="action-btn-group">
+                                        <a class="action-btn action-view"><i class="bi bi-eye"></i></a>
+                                        <a class="action-btn action-schedule"><i class="bi bi-calendar-check"></i></a>
+                                        <a asp-controller="Staff" asp-action="Create" class="action-btn action-edit"><i class="bi bi-pencil"></i></a>
+                                        <a class="action-btn action-delete"><i class="bi bi-trash"></i></a>
+                                    </div>
+                                </td>
+                        </tr>
 
-                    <tr>
-                        <td>13</td>
-                        <td>
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="avatar-circle">CL</div>
-                                <strong>Christopher Lee</strong>
-                            </div>
-                        </td>
-                        <td><span class="badge badge-info">Operations</span></td>
-                        <td><i class="bi bi-envelope me-1"></i>chris.lee@company.com</td>
-                        <td class="text-center"><span class="badge bg-purple">0</span></td>
-                        <td class="text-center"><span class="badge bg-success">0.0%</span></td>
-                        <td>2025-11-20</td>
-                        <td class="text-end">
-                            <div class="action-btn-group">
-                                <a class="action-btn action-view"><i class="bi bi-eye"></i></a>
-                                <a class="action-btn action-schedule"><i class="bi bi-calendar-check"></i></a>
-                                <a asp-controller="Staff" asp-action="Create" class="action-btn action-edit"><i class="bi bi-pencil"></i></a>
-                                <a class="action-btn action-delete"><i class="bi bi-trash"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-
+                    }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8" class="text-center text-muted py-4">
+                                No staff members found.
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
@@ -135,18 +125,17 @@
 
 @section Scripts {
     <script>
-        document.getElementById("staffSearch").addEventListener("keyup", function () {
-            const value = this.value.toLowerCase();
+                document.getElementById("departmentFilter").addEventListener("change", function () {
+            const filterValue = this.value.toLowerCase();
             const rows = document.querySelectorAll("#staffTable tbody tr");
-            let count = 0;
 
             rows.forEach(row => {
-                const visible = row.innerText.toLowerCase().includes(value);
+                // Assuming Department is in the 3rd column (index 2)
+                const deptCell = row.cells[2].innerText.toLowerCase();
+                const visible = filterValue === "" || deptCell.includes(filterValue);
                 row.style.display = visible ? "" : "none";
-                if (visible) count++;
             });
-
-            document.getElementById("staffCount").innerText = count;
         });
+
     </script>
 }

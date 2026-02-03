@@ -327,6 +327,34 @@
             </div>
         </div>
 
+        <div class="row g-3 mt-1">
+            <div class="col-md-8">
+                <div class="chart-card">
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6 class="fw-bold m-0">Meeting Trends (Monthly)</h6>
+                        <div class="dropdown">
+                            <i class="fas fa-ellipsis-v text-muted" style="cursor:pointer;" data-bs-toggle="dropdown"></i>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="chart-card">
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6 class="fw-bold m-0">Top Regions</h6>
+                        <i class="fas fa-map-marker-alt text-muted"></i>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="regionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -369,6 +397,62 @@
                     scales: { y: { beginAtZero: true } }
                 }
             });
+
+                    // --- 3. Line Chart (Meeting Trends) ---
+        new Chart(document.getElementById('trendChart'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Scheduled',
+                    data: [30, 45, 35, 60, 50, 70],
+                    borderColor: '#7367f0',
+                    backgroundColor: 'rgba(115, 103, 240, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 4
+                }, {
+                    label: 'Completed',
+                    data: [25, 38, 30, 55, 48, 65],
+                    borderColor: '#28c76f',
+                    backgroundColor: 'transparent',
+                    borderDash: [5, 5],
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'top', labels: { usePointStyle: true } } },
+                scales: {
+                    y: { grid: { color: '#f0f0f0' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // --- 4. Horizontal Bar Chart (Regional Activity) ---
+        new Chart(document.getElementById('regionChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Rajkot', 'Ahmedabad', 'Surat', 'Vadodara'],
+                datasets: [{
+                    data: [450, 380, 320, 210],
+                    backgroundColor: ['#7367f0', '#00cfe8', '#ff9f43', '#10b981'],
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                indexAxis: 'y', // Makes it horizontal
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { display: false } },
+                    y: { grid: { display: false } }
+                }
+            }
+        });
 
         });
     </script>

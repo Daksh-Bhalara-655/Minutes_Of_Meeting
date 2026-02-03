@@ -5,10 +5,10 @@ namespace Minutes_Of_Meeting.Models
     public class MeetingVenue
     {
         [Key]
-        public int Meeting_Venue_Id { get; set; }
+        public int MeetingVenueID { get; set; }
 
         [Required(ErrorMessage = "Meeting Venue Name is required")]
-        public string Meeting_Venue_Name { get; set; }
+        public string MeetingVenueName { get; set; }
 
         public DateTime Created { get; set; }
 

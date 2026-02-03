@@ -6,10 +6,10 @@ namespace Minutes_Of_Meeting.Models
     public class MeetingTypeModel
     {
         [Key]
-        public int Meeting_Id { get; set; }
+        public int MeetingTypeID { get; set; }
 
         [Required(ErrorMessage = "Meeting-Type-Name is required")]
-        public string Meeting_Type_Name { get; set; }
+        public string MeetingTypeName { get; set; }
 
         [StringLength (100)]
         public string? Remarks { get; set;  }

@@ -5,16 +5,16 @@ namespace Minutes_Of_Meeting.Models
     public class MeetingMembers
     {
         [Key]
-        public int Meeting_Member_Id { get; set; }
+        public int MeetingMemberID { get; set; }
 
         [Key]
-        public int Meeting_Id { get; set; }
+        public int MeetingID { get; set; }
 
         [Key]
-        public int Staff_Id { get; set; }
+        public int StaffID { get; set; }
 
 
-        public bool Is_Present { get; set; }
+        public bool IsPresent { get; set; }
 
         public string? Remark { get; set; }
 

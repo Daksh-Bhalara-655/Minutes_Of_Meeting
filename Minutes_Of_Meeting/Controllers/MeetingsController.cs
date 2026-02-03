@@ -7,7 +7,7 @@ namespace Minutes_Of_Meeting.Controllers
     {
         public IActionResult Index()
         {
-            return View("Meeing_List");
+            return View("Meeting_List");
         }
         public IActionResult Create()
         {
@@ -15,12 +15,11 @@ namespace Minutes_Of_Meeting.Controllers
         }
         public IActionResult Save(MeetingsModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View ("Create_Meeting");
             }
-
-            return Redirect("Meeing_List");
+            return View("Meeting_List");
         }
     }
 }

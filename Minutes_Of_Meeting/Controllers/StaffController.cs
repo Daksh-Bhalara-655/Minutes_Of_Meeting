@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
+using Minutes_Of_Meeting.DbConfig;
 using Minutes_Of_Meeting.Models;
 using System.Data;
 
@@ -7,44 +9,57 @@ namespace Minutes_Of_Meeting.Controllers
 {
     public class StaffController : Controller
     {
+
+        private readonly Db_Connection db_Connection;
+
+        public StaffController(Db_Connection db_Connection)
+        {
+            this.db_Connection = db_Connection;
+        }
+
         public IActionResult Index()
         {
-            List<Staff> staffs = new List<Staff>();
-            SqlConnection conn = new SqlConnection("Server=LAPTOP-9V1759OU\\SQLEXPRESS;Database=Minutes_of_Meeting_Management;Trusted_Connection=True;TrustServerCertificate=True");
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = conn;
-            cmd.CommandText = "SP_GET_ALL_STAFF";
-            cmd.CommandType = CommandType.StoredProcedure;
-            conn.Open();
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            using (SqlConnection conn = new SqlConnection(db_Connection.GetWorkingConnectionString()))
             {
-                Staff staff = new Staff();
-                staff.StaffID = Convert.ToInt32(reader["StaffID"]);
-                staff.DepartmentName = reader["DepartmentName"].ToString();
-                staff.StaffName = reader["StaffName"].ToString();
-                staff.EmailAddress = reader["EmailAddress"].ToString();
-                staff.Remarks = reader["Remarks"] == DBNull.Value ? null : reader["Remarks"].ToString();
-                staff.Created = Convert.ToDateTime(reader["Created"]);
-                staff.Modified = Convert.ToDateTime(reader["Modified"]);
-                staffs.Add(staff);
+                SqlCommand cmd = new SqlCommand("SP_GET_ALL_STAFF", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                List<Staff> staffs = new List<Staff>();
+
+                while (reader.Read())
+                {
+                    staffs.Add(new Staff
+                    {
+                        StaffID = Convert.ToInt32(reader["StaffID"]),
+                        StaffName = reader["StaffName"].ToString(),
+                        DepartmentName = reader["DepartmentName"].ToString(),
+                        EmailAddress = reader["EmailAddress"].ToString(),
+                        Remarks = reader["Remarks"] == DBNull.Value ? null : reader["Remarks"].ToString(),
+                        Created = Convert.ToDateTime(reader["Created"]),
+                        Modified = Convert.ToDateTime(reader["Modified"])
+                    });
+                }
+
+                var vm = new StaffListViewModel
+                {
+                    Staffs = staffs,
+
+                    DepartmentList = staffs
+                        .Select(s => s.DepartmentName)
+                        .Distinct()
+                        .Select(dept => new SelectListItem
+                        {
+                            Text = dept,
+                            Value = dept
+                        })
+                        .ToList()
+                };
+
+                return View("Staff_List", vm);
             }
-            reader.Close();
-            conn.Close();
-            var departments = staffs
-        .Select(s => s.DepartmentName.ToString()) // Assuming you want to show the ID or Name
-        .Distinct()
-        .Select(dept => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
-        {
-            Text = dept,
-            Value = dept
-        })
-        .ToList();
-
-            // Use a clear name for your ViewBag property
-            ViewBag.DepartmentList = departments;
-
-            return View("Staff_List",staffs);
         }
 
         public IActionResult Create()
@@ -57,7 +72,7 @@ namespace Minutes_Of_Meeting.Controllers
         {
             if (!ModelState.IsValid)
             {
-                
+
                 return View("Staff_Create");
             }
             return View("Staff_List");

@@ -1,3 +1,5 @@
+using Minutes_Of_Meeting.DbConfig;
+
 namespace Minutes_Of_Meeting
 {
     public class Program
@@ -9,8 +11,9 @@ namespace Minutes_Of_Meeting
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddScoped<Db_Connection>();
             var app = builder.Build();
-
+          
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -19,9 +22,6 @@ namespace Minutes_Of_Meeting
             app.UseRouting();
 
             app.UseAuthorization();
-
-           
-
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",

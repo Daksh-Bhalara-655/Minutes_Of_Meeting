@@ -1,15 +1,10 @@
-﻿@model IEnumerable<Minutes_Of_Meeting.Models.Staff>
+﻿@model StaffListViewModel
+
 @{
     ViewData["Title"] = "Staff Members";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{
-    int count_Staff = 0;
-    foreach (var staff in Model)
-    {
-        count_Staff++;
-    }
-}
+
 
 <link rel="stylesheet" href="~/css/staff-list.css" asp-append-version="true" />
 
@@ -34,9 +29,8 @@
         <div class="row g-3 align-items-end">
             <div class="col-md-2">
                 <label class="form-label">Department</label>
-                <select id="departmentFilter" class="form-select" asp-items="ViewBag.DepartmentList">
+                <select id="departmentFilter" class="form-select" asp-items="Model.DepartmentList">
                     <option value="">All Departments</option>
-
                 </select>
             </div>
 
@@ -54,7 +48,9 @@
             <div class="col-md-auto ms-auto d-flex align-items-center gap-3">
                 <a class="text-primary text-decoration-none fw-semibold">Search</a>
                 <a class="text-muted text-decoration-none">Clear</a>
-                <span class="text-muted">Total: <strong id="staffCount">@count_Staff</strong></span>
+                <span class="text-muted">Total: <strong id="staffCount">
+                        @ViewBag.StaffCount
+                </strong></span>
             </div>
         </div>
     </div>
@@ -80,9 +76,9 @@
                 </thead>
                 <tbody>
 
-                    @if(Model != null && Model.Any())
+                    @if (Model != null && Model.Staffs != null && Model.Staffs.Any())
                     {
-                    @foreach(var staff in Model)
+                    @foreach(var staff in Model.Staffs)
                     {
                         <tr>
                             <td>@staff.StaffID</td>

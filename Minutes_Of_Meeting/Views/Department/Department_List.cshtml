@@ -48,13 +48,27 @@
                             <tr>
                                 <td>@department.DepartmentID</td>
                                 <td>@department.DepartmentName</td>
-                                <td>@department.Created.ToString("yyyy-MM-dd")</td>
-                                <td>@department.Modified.ToString("yyyy-MM-dd")</td>
+                                <td>@department.Created.ToString()</td>
+                                <td>@department.Modified.ToString()</td>
                                 <td class="text-end">
                                     <div class="action-btn-group">
-                                        <a href="#" class="action-btn view"><i class="bi bi-eye"></i></a>
-                                        <a asp-controller="Department" asp-action="Create" class="action-btn edit"><i class="bi bi-pencil"></i></a>
-                                        <a href="#" class="action-btn delete"><i class="bi bi-trash"></i></a>
+                                        <a 
+                                            asp-controller="Department"
+                                            asp-action="Details"    
+                                           asp-route-id="@department.DepartmentID"
+
+                                            class="action-btn view"><i class="bi bi-eye"></i></a>
+
+                                        <a asp-controller="Department" asp-action="Create"
+                                           asp-route-id="@department.DepartmentID"
+                                        class="action-btn edit"><i class="bi bi-pencil"></i></a>
+
+                                        <a asp-controller="Department" 
+                                            asp-action="Delete" 
+                                           asp-route-id="@department.DepartmentID"
+                                           onclick="return confirm('Are you sure you want to delete this department?')"
+                                        class="action-btn delete"><i class="bi bi-trash"></i></a>
+                                        
                                     </div>
                                 </td>
                             </tr>

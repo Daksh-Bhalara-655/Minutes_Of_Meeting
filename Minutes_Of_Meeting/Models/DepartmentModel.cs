@@ -12,9 +12,9 @@ namespace Minutes_Of_Meeting.Models
 
         [Display(Name="Created Date")]
       
-        public DateTime Created { get; set; }
+        public DateTime? Created { get; set; }
 
         [Display(Name = "Modified Date")]
-        public DateTime Modified { get; set; }
+        public DateTime? Modified { get; set; }
     }
 }

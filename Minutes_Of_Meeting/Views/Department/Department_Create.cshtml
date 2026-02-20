@@ -11,8 +11,10 @@
 
         <!-- Page Header -->
         <div class="mb-4">
-            <h4 class="main-title">Add New Department</h4>
-            <p class="sub-title">Create a new department for your organization</p>
+        <h4 class="main-title">
+            @(Model.DepartmentID > 0 ? "Edit Department" : "Add New Department")
+        </h4>
+        <p class="sub-title">Create a new department for your organization</p>
         </div>
 
         <!-- Card -->
@@ -24,7 +26,8 @@
             </div>
 
             <div class="card-body p-4">
-            <form asp-action="Save" method="post" >
+            <form asp-action="Save" method="post">
+                <input type="hidden" asp-for="DepartmentID" />
 
                     <!-- Department Name -->
                     <div class="mb-4">
@@ -59,7 +62,7 @@
 
                     <!-- Buttons -->
                     <div class="d-flex justify-content-end gap-3">
-                        <a href="/Department/DepartmentList" class="back-link">
+                        <a asp-controller="Department" asp-action="index" class="back-link">
                             <i class="bi bi-arrow-left"></i> Back to List
                         </a>
 

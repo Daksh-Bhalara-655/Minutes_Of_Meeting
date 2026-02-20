@@ -1,0 +1,98 @@
+﻿@model Minutes_Of_Meeting.Models.Staff
+@{
+    ViewData["Title"] = "Staff Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/staff-details.css" />
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+
+            <div class="card profile-card">
+                <div class="profile-header text-center position-relative">
+                    <div class="avatar-circle">
+                        @(string.IsNullOrEmpty(Model.StaffName) ? "?" : Model.StaffName.Substring(0, 1).ToUpper())
+                    </div>
+                    <h3 class="text-white fw-bold mb-1">@Model.StaffName</h3>
+                    <span class="badge bg-white text-primary rounded-pill px-3 py-2 shadow-sm">
+                        <i class="bi bi-person-badge me-1"></i> ID: @Model.StaffID
+                    </span>
+                </div>
+
+                <div class="profile-body position-relative">
+                    <div class="row g-4">
+
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div class="icon-box me-3">
+                                <i class="bi bi-building"></i>
+                            </div>
+                            <div>
+                                <div class="info-label">Department</div>
+                                <div class="info-value">
+                                    <span class="badge bg-info text-dark">@Model.DepartmentName</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div class="icon-box me-3">
+                                <i class="bi bi-phone"></i>
+                            </div>
+                            <div>
+                                <div class="info-label">Mobile Number</div>
+                                <div class="info-value">@Model.MobileNo</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div class="icon-box me-3">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="info-label">Email Address</div>
+                                <div class="info-value">@Model.EmailAddress</div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 d-flex align-items-start mt-4">
+                            <div class="icon-box me-3 mt-1">
+                                <i class="bi bi-chat-left-text"></i>
+                            </div>
+                            <div>
+                                <div class="info-label">Remarks</div>
+                                <div class="info-value text-muted">
+                                    @(string.IsNullOrEmpty(Model.Remarks) ? "No remarks available." : Model.Remarks)
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4 text-muted opacity-25" />
+
+                        <div class="col-md-6">
+                            <div class="info-label"><i class="bi bi-calendar-plus me-1"></i> Created On</div>
+                            <div class="small text-muted">@Model.Created.ToString("dd MMM yyyy, hh:mm tt")</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="info-label"><i class="bi bi-calendar-check me-1"></i> Last Modified</div>
+                            <div class="small text-muted">@Model.Modified.ToString("dd MMM yyyy, hh:mm tt")</div>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-5 d-flex justify-content-end gap-2">
+                        <a asp-action="Index" class="btn btn-light px-4 border">
+                            <i class="bi bi-arrow-left me-2"></i> Back to List
+                        </a>
+                        <a asp-action="Create" asp-route-id="@Model.StaffID" class="btn btn-primary px-4 shadow-sm">
+                            <i class="bi bi-pencil-square me-2"></i> Edit Profile
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

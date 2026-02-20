@@ -1,3 +1,4 @@
+using Minutes_Of_Meeting.Controllers;
 using Minutes_Of_Meeting.DbConfig;
 
 namespace Minutes_Of_Meeting
@@ -10,6 +11,7 @@ namespace Minutes_Of_Meeting
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<DepartmentList>();
 
             builder.Services.AddScoped<Db_Connection>();
             var app = builder.Build();

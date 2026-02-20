@@ -35,7 +35,7 @@
                                     <label asp-for="StaffName" class="form-label">Staff Name</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                        <input type="text" class="form-control" placeholder="Enter staff name">
+                                    <input asp-for="StaffName" type="text" class="form-control" placeholder="Enter staff name">
                                     </div>
                                 <span asp-validation-for="StaffName" class="text-danger"></span>
                                 </div>
@@ -44,11 +44,9 @@
                                     <label asp-for="DepartmentName" class="form-label">Department</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-building"></i></span>
-                                        <select class="form-select">
-                                            <option selected>-- Select Department --</option>
-                                            <option>Operations</option>
-                                            <option>Finance</option>
-                                            <option>IT</option>
+                                    <select asp-for="DepartmentName" asp-items="ViewBag.DepartmentList" class="form-select">
+                                            <option value="" selected>-- Select Department --</option>
+                                            
                                         </select>
                                     </div>
                                 <span asp-validation-for="DepartmentName" class="text-danger"></span>
@@ -58,7 +56,7 @@
                                     <label asp-for="EmailAddress" class="form-label">Email Address</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                        <input type="email" class="form-control" placeholder="Enter email address">
+                                    <input asp-for="EmailAddress" type="email" class="form-control" placeholder="Enter email address">
                                     </div>
                                 <span asp-validation-for="EmailAddress" class="text-danger"></span>
                                 </div>
@@ -67,7 +65,7 @@
                                     <label class="form-label">Mobile Number</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                                        <input type="number" class="form-control" placeholder="Enter mobile number">
+                                    <input asp-for="MobileNo" type="number" class="form-control" placeholder="Enter mobile number">
                                     </div>
                                     <div class="helper-text">Example: +91 98765 43210</div>
                                 </div>
@@ -76,7 +74,7 @@
                                     <label class="form-label">Remarks</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-chat-dots"></i></span>
-                                        <textarea class="form-control" rows="3"
+                                    <textarea asp-for="Remarks" class="form-control" rows="3"
                                                   placeholder="Enter any additional remarks (optional)"></textarea>
                                     </div>
                                 </div>

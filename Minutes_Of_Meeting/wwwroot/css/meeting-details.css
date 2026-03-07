@@ -1,0 +1,71 @@
+﻿body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 40px 0;
+}
+
+/* Titles */
+.main-title {
+    font-weight: 700;
+}
+
+.sub-title {
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+
+/* Card */
+.custom-card {
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.card-header-custom {
+    background: linear-gradient(90deg,#6f42c1,#563d7c);
+    color: white;
+    padding: 18px 25px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Detail Labels */
+.detail-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #6c757d;
+    margin-bottom: 6px;
+}
+
+/* Detail Box */
+.detail-box {
+    background: #f4f1fb;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Description */
+.detail-description {
+    background: #f4f1fb;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* Status */
+.badge-active {
+    background: #198754;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+.badge-cancel {
+    background: #dc3545;
+    padding: 6px 12px;
+    border-radius: 20px;
+}

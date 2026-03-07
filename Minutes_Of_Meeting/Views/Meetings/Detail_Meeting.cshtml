@@ -1,0 +1,138 @@
+﻿@model Minutes_Of_Meeting.Models.MeetingsModel
+
+@{
+    ViewData["Title"] = "Meeting Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/meeting-details.css" />
+
+<div class="container">
+
+    <!-- Page Header -->
+    <div class="mb-4">
+        <h4 class="main-title">Meeting Details</h4>
+        <p class="sub-title">View complete information about the meeting</p>
+    </div>
+
+    <div class="card custom-card">
+
+        <div class="card-header-custom">
+            <i class="bi bi-calendar-event"></i>
+            Meeting Information
+        </div>
+
+        <div class="card-body p-4">
+
+            <div class="row g-4">
+
+                <!-- Meeting ID -->
+                <div class="col-md-6">
+                    <label class="detail-label">Meeting ID</label>
+                    <div class="detail-box">@Model.MeetingID</div>
+                </div>
+
+                <!-- Department -->
+                <div class="col-md-6">
+                    <label class="detail-label">Department</label>
+                    <div class="detail-box">@Model.DepartmentName</div>
+                </div>
+
+                <!-- Meeting Date -->
+                <div class="col-md-6">
+                    <label class="detail-label">Meeting Date</label>
+                    <div class="detail-box">
+                        @Model.MeetingDate.ToString("dd-MM-yyyy HH:mm")
+                    </div>
+                </div>
+
+                <!-- Meeting Type -->
+                <div class="col-md-6">
+                    <label class="detail-label">Meeting Type</label>
+                    <div class="detail-box">@Model.MeetingTypeName</div>
+                </div>
+
+                <!-- Meeting Venue -->
+                <div class="col-md-6">
+                    <label class="detail-label">Meeting Venue</label>
+                    <div class="detail-box">@Model.MeetingVenueName</div>
+                </div>
+
+                <!-- Status -->
+                <div class="col-md-6">
+                    <label class="detail-label">Status</label>
+                    <div>
+                        @if (Model.IsCancelled)
+                        {
+                            <span class="badge bg-danger">Cancelled</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-success">Active</span>
+                        }
+                    </div>
+                </div>
+
+                <!-- Cancellation Date -->
+                @if (Model.CancellationDateTime != null)
+                {
+                    <div class="col-md-6">
+                        <label class="detail-label">Cancellation Date</label>
+                        <div class="detail-box">
+                            @Model.CancellationDateTime?.ToString("dd-MM-yyyy HH:mm")
+                        </div>
+                    </div>
+                }
+
+                <!-- Cancellation Reason -->
+                @if (!string.IsNullOrEmpty(Model.CancellationReason))
+                {
+                    <div class="col-md-6">
+                        <label class="detail-label">Cancellation Reason</label>
+                        <div class="detail-box">
+                            @Model.CancellationReason
+                        </div>
+                    </div>
+                }
+
+                <!-- Document -->
+                <div class="col-md-6">
+                    <label class="detail-label">Document</label>
+                    <div>
+                        @if (!string.IsNullOrEmpty(Model.DocumentPath))
+                        {
+                            <a href="@Model.DocumentPath"
+                               class="btn btn-outline-primary btn-sm"
+                               target="_blank">
+                                <i class="bi bi-file-earmark"></i> View Document
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="text-muted">No document uploaded</span>
+                        }
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="col-12">
+                    <label class="detail-label">Meeting Description</label>
+                    <div class="detail-description">
+                        @Model.MeetingDescription
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Back Button -->
+            <div class="mt-4 text-end">
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Back to List
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

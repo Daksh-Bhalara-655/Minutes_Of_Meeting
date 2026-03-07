@@ -24,5 +24,8 @@ namespace Minutes_Of_Meeting.Models
         [Required]
         public string MeetingTypeName { get; set; }
 
+        [Required]
+        public DateTime MeetingDate { get; set; }
+
     }
 }

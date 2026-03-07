@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Minutes_Of_Meeting.Models.MeetingVenue>
+@{
     ViewData["Title"] = "Meeting Venues";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -44,7 +45,29 @@
                 </thead>
 
                 <tbody>
-                    <tr>
+                    @foreach (var venue in Model)
+                    {
+                        <tr>
+                            <td>@venue.MeetingVenueID</td>
+                            <td>@venue.MeetingVenueName</td>
+                            <td>@venue.Created.ToString("yyyy-MM-dd")</td>
+                            <td>@venue.Modified.ToString("yyyy-MM-dd")</td>
+                            <td class="text-end">
+                                <div class="action-btn-group">
+                                    <a asp-controller="MeetingVenue" asp-action="Details" asp-route-id="@venue.MeetingVenueID" class="action-btn view" title="View">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a asp-controller="MeetingVenue" asp-action="Create" asp-route-id="@venue.MeetingVenueID" class="action-btn edit" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a asp-controller="MeetingVenue" asp-action="Delete" asp-route-id="@venue.MeetingVenueID" class="action-btn delete" title="Delete">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    @* <tr>
                         <td>1</td>
                         <td>Main Conference Hall</td>
                         <td>2025-01-10</td>
@@ -92,7 +115,7 @@
                                 <a class="action-btn delete"><i class="bi bi-trash"></i></a>
                             </div>
                         </td>
-                    </tr>
+                    </tr> *@
                 </tbody>
             </table>
         </div>

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Minutes_Of_Meeting.Models.MeetingTypeModel>
+@{
     ViewData["Title"] = "Meeting Types";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -44,59 +45,54 @@
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Weekly Review</td>
-                        <td>Regular team sync-up</td>
-                        <td>2025-01-10</td>
-                        <td>2025-01-18</td>
-                        <td class="text-end">
-                            <div class="action-btn-group">
-                                <a class="action-btn view" title="View">
-                                    <i class="bi bi-eye"></i>
-                                </a>
-                                <a asp-controller="MeetingTypes" asp-action="Create" class="action-btn edit" title="Edit">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <a class="action-btn delete" title="Delete">
-                                    <i class="bi bi-trash"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var meetingType in Model)
+                        {
+                            <tr>
+                                <td>@meetingType.MeetingTypeID</td>
+                                <td>@meetingType.MeetingTypeName</td>
+                                <td>@meetingType.Remarks</td>
+                                <td>@meetingType.Created</td>
+                                <td>@meetingType.Modified</td>
 
-                    <tr>
-                        <td>2</td>
-                        <td>Client Meeting</td>
-                        <td>External client discussion</td>
-                        <td>2025-01-12</td>
-                        <td>
-                            2025-01-20
-                        </td>
-                        <td class="text-end">
-                            <div class="action-btn-group">
-                                <a class="action-btn view"><i class="bi bi-eye"></i></a>
-                                <a asp-controller="MeetingTypes" asp-action="Create" class="action-btn edit"><i class="bi bi-pencil"></i></a>
-                                <a class="action-btn delete"><i class="bi bi-trash"></i></a>
-                            </div>
-                        </td>
-                    </tr>
+                                <td class="text-end">
+                                    <div class="action-btn-group">
+                                        <a asp-controller="MeetingTypes"
+                                           asp-action="Details"
+                                           asp-route-id="@meetingType.MeetingTypeID"
+                                           class="action-btn view">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
 
-                    <tr>
-                        <td>3</td>
-                        <td>Board Meeting</td>
-                        <td>Management level meeting</td>
-                        <td>2025-01-15</td>
-                        <td>2025-01-22</td>
-                        <td class="text-end">
-                            <div class="action-btn-group">
-                                <a class="action-btn view"><i class="bi bi-eye"></i></a>
-                                <a asp-controller="MeetingTypes" asp-action="Create" class="action-btn edit"><i class="bi bi-pencil"></i></a>
-                                <a class="action-btn delete"><i class="bi bi-trash"></i></a>
-                            </div>
-                        </td>
-                    </tr>
+                                        <a asp-controller="MeetingTypes"
+                                           asp-action="Create"
+                                           asp-route-id="@meetingType.MeetingTypeID"
+                                           class="action-btn edit">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+
+                                        <a asp-controller="MeetingTypes"
+                                           asp-action="Delete"
+                                           asp-route-id="@meetingType.MeetingTypeID"
+                                           class="action-btn delete">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">
+                                No Meeting Types Found
+                            </td>
+                        </tr>
+                    }
                 </tbody>
+
             </table>
         </div>
 

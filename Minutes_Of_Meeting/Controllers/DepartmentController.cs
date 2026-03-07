@@ -20,7 +20,7 @@ namespace Minutes_Of_Meeting.Controllers
         {
             List<DepartmentModel> departments = new List<DepartmentModel>();
 
-            using (SqlConnection conn = new SqlConnection(Db_Connection.GetWorkingConnectionString()))
+            using (SqlConnection conn = Db_Connection.CreateConnection())
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conn;
@@ -48,7 +48,7 @@ namespace Minutes_Of_Meeting.Controllers
             DepartmentModel departmentModel = new DepartmentModel();
             if(id != null &&  id > 0)
             {
-                using (SqlConnection conn = new SqlConnection(Db_Connection.GetWorkingConnectionString()))
+                using (SqlConnection conn = Db_Connection.CreateConnection())
                 {
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = conn;
@@ -77,7 +77,7 @@ namespace Minutes_Of_Meeting.Controllers
             {
                 return View("Department_Create", model);
             }
-            using (SqlConnection conn = new SqlConnection(Db_Connection.GetWorkingConnectionString()))
+            using (SqlConnection conn = Db_Connection.CreateConnection())
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conn;
@@ -102,7 +102,7 @@ namespace Minutes_Of_Meeting.Controllers
 
         public IActionResult Delete(int id)
         {
-            using (SqlConnection conn = new SqlConnection(Db_Connection.GetWorkingConnectionString()))
+            using (SqlConnection conn = Db_Connection.CreateConnection())
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conn;
@@ -119,7 +119,7 @@ namespace Minutes_Of_Meeting.Controllers
         {
             DepartmentModel departmentModel = new DepartmentModel();
 
-            using (SqlConnection conn = new SqlConnection(Db_Connection.GetWorkingConnectionString()))
+            using (SqlConnection conn = Db_Connection.CreateConnection())
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conn;

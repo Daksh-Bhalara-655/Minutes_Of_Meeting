@@ -23,7 +23,14 @@
 
                     <div class="card-header-custom">
                         <i class="bi bi-person-plus-fill"></i>
-                        Add New Staff Member
+                        @if (Model != null && Model.StaffID > 0)
+                        {
+                            @:Edit Staff Member
+                        }
+                        else
+                        {
+                            @:Create New Staff Member
+                    }
                     </div>
 
                     <div class="card-body p-4">

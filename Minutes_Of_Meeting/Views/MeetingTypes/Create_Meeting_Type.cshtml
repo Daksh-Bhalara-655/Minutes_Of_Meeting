@@ -12,8 +12,10 @@
 
         <!-- Page Header -->
         <div class="mb-4">
-            <h4 class="main-title">Add Meeting Type</h4>
-            <p class="sub-title">Create a new meeting type</p>
+            <h4 class="main-title">
+            @(Model.MeetingTypeID > 0 ? "Edit Meeting Types " : "Add Meeting Types")
+            </h4>
+            @* <p class="sub-title">Create a new meeting type</p> *@
         </div>
 
         <!-- Card -->
@@ -21,11 +23,12 @@
 
             <div class="card-header-custom">
                 <i class="bi bi-calendar-event-fill"></i>
-                Add Meeting Type
+                @(Model.MeetingTypeID > 0 ? "Edit Meeting Types " : "Add Meeting Types")
             </div>
 
             <div class="card-body p-4">
             <form asp-action="Save" method="post">
+                <input type="hidden"  asp-for="MeetingTypeID"/>
 
                     <!-- Meeting Type Name -->
                     <div class="mb-4">

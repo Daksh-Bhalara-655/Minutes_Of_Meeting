@@ -8,16 +8,16 @@ namespace Minutes_Of_Meeting.Controllers
     {
         public List<SelectListItem> DepartmentSelectList { get; set; }
 
-           private readonly Db_Connection Db_Connection;
+           private readonly Db_Connection db_Connection;
         public DepartmentList(Db_Connection db_Connection)
             {
-            this.Db_Connection = db_Connection;
+            this.db_Connection = db_Connection;
             DepartmentSelectList = new List<SelectListItem>();
         }
 
         public List<SelectListItem> GetDepartmentSelectList()
         {
-            using (SqlConnection conn = new SqlConnection(Db_Connection.GetWorkingConnectionString()))
+            using (SqlConnection conn = db_Connection.CreateConnection())
             {
                 SqlCommand cmd = new SqlCommand("SP_GET_ALL_DEPARTMENTS", conn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;

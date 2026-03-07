@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Minutes_Of_Meeting.DbConfig;
 using Minutes_Of_Meeting.Models;
+using Minutes_Of_Meeting.Services;
 using System.Data;
 using System.Data.Common;
 
@@ -22,7 +23,7 @@ namespace Minutes_Of_Meeting.Controllers
 
         public IActionResult Index()
         {
-            using (SqlConnection conn = new SqlConnection(db_Connection.GetWorkingConnectionString()))
+            using (SqlConnection conn = db_Connection.CreateConnection())
             {
                 SqlCommand cmd = new SqlCommand("SP_GET_ALL_STAFF", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -65,7 +66,7 @@ public IActionResult Create(int? id)
             if (id != null && id > 0)
             {
                 
-                using (SqlConnection conn = new SqlConnection(db_Connection.GetWorkingConnectionString()))
+                using (SqlConnection conn = db_Connection.CreateConnection())
                 {
                     SqlCommand cmd = new SqlCommand("SP_GET_STAFF_BY_ID", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -97,7 +98,7 @@ public IActionResult Create(int? id)
                 ViewBag.DepartmentList = departmentList.GetDepartmentSelectList();
                 return View("Staff_Create",model);
             }
-            using (SqlConnection conn = new SqlConnection(db_Connection.GetWorkingConnectionString()))
+            using (SqlConnection conn = db_Connection.CreateConnection())
                 if(model.StaffID > 0)
                 {
                     SqlCommand cmd = new SqlCommand("SP_UPDATE_STAFF", conn);
@@ -134,7 +135,7 @@ public IActionResult Create(int? id)
         public IActionResult Details(int id)
         {
             Staff staff = new Staff();
-            using (SqlConnection conn = new SqlConnection(db_Connection.GetWorkingConnectionString()))
+            using (SqlConnection conn = db_Connection.CreateConnection())
             {
                 SqlCommand cmd = new SqlCommand("SP_GET_STAFF_BY_ID", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -158,7 +159,7 @@ public IActionResult Create(int? id)
 
         public IActionResult Delete(int id)
         {
-            using (SqlConnection conn = new SqlConnection(db_Connection.GetWorkingConnectionString()))
+            using (SqlConnection conn = db_Connection.CreateConnection())
             {
                 SqlCommand cmd = new SqlCommand("SP_DELETE_STAFF", conn);
                 cmd.CommandType = CommandType.StoredProcedure;

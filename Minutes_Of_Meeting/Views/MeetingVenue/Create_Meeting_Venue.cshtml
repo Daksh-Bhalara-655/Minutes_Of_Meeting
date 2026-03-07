@@ -10,8 +10,12 @@
 
     <!-- HEADER -->
     <div class="mb-4">
-        <h4 class="main-title">Add Meeting Venue</h4>
-        <p class="sub-title">Create a new meeting venue</p>
+        <h4 class="main-title">
+            @(Model.MeetingVenueID == 0 ? "Add Meeting Venue" : "Edit Meeting Venue"))
+        </h4>
+        <p class="sub-title">
+            @(Model.MeetingVenueID == 0 ? "Create a new meeting venue" : "Update meeting venue details")
+        </p>
     </div>
 
     <!-- CARD -->
@@ -25,6 +29,7 @@
         <div class="card-body p-4">
 
             <form asp-action="Save" method="post">
+                <input type="hidden" asp-for="MeetingVenueID" />
 
                 <div class="row g-4">
 

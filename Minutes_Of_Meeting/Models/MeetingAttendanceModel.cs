@@ -27,5 +27,8 @@ namespace Minutes_Of_Meeting.Models
         [Required]
         public DateTime MeetingDate { get; set; }
 
+        [Required]
+        public decimal AttendancePercent { get; set; }
+
     }
 }

@@ -29,9 +29,10 @@ namespace Minutes_Of_Meeting.Services
                     MeetingTypeSelectList.Add(new SelectListItem
                     {
                         Text = reader["MeetingTypeName"].ToString(),
-                        Value = reader["MeetingTypeName"].ToString()
+                        Value = reader["MeetingTypeID"].ToString()
                     });
                 }
+
             }
             return MeetingTypeSelectList;
         }

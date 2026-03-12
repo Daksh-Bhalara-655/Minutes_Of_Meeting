@@ -77,9 +77,8 @@
                                         <div class="form-check d-flex justify-content-center mb-0">
                                             <input type="checkbox"
                                                    class="form-check-input staff-checkbox border-secondary"
-                                                   name="StaffId"
-                                                   value="@staff.StaffID"
-                                                   style="cursor: pointer; width: 1.25rem; height: 1.25rem;" />
+                                                   name="SelectedStaff"
+                                                   value="@staff.StaffID" />
                                         </div>
                                     </td>
                                 </tr>
@@ -116,7 +115,6 @@
             const selectAllToggle = document.getElementById("selectAllToggle");
             const staffCheckboxes = document.querySelectorAll(".staff-checkbox");
 
-            // Handle "Select All" click
             if (selectAllToggle) {
                 selectAllToggle.addEventListener("change", function () {
                     staffCheckboxes.forEach(function (checkbox) {
@@ -125,17 +123,25 @@
                 });
             }
 
-            // Uncheck "Select All" if a single user is manually unchecked
             staffCheckboxes.forEach(function (checkbox) {
                 checkbox.addEventListener("change", function () {
                     if (!this.checked) {
                         selectAllToggle.checked = false;
                     } else {
-                        // Check if all are currently selected
                         const allChecked = Array.from(staffCheckboxes).every(c => c.checked);
                         selectAllToggle.checked = allChecked;
                     }
                 });
+            });
+
+            document.querySelector("form").addEventListener("submit", function (e) {
+                const checked = document.querySelectorAll(".staff-checkbox:checked");
+
+                if (checked.length === 0) {
+                    e.preventDefault();
+                    alert("Please select at least one staff member.");
+                    
+                }
             });
         });
     </script>

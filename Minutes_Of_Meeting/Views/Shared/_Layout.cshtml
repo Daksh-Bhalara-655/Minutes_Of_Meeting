@@ -12,6 +12,8 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    @RenderSection("Styles", required: false)
+
 </head>
 <body>
 
@@ -56,8 +58,11 @@
                 <a asp-controller="Meetings" asp-action="Index" class="nav-link @(navActive("Meetings","Index"))">
                     <i class="fas fa-calendar-alt"></i> All Meetings
                 </a>
-                <a asp-controller="MeetingMembers" asp-action="Index" class="nav-link @(navActive("MeetingMembers", "Index"))">
-                    <i class="fas fa-plus-circle"></i>  Meeting Member List
+                <a asp-controller="Meetings"
+                       asp-action="History"
+                       class="nav-link @(navActive("Meetings", "History"))">
+
+                    <i class="fas fa-history me-2"></i> Meeting History
                 </a>
                 <a asp-controller="Meetings" asp-action="Create" class="nav-link @(navActive("Meetings","Create"))">
                     <i class="fas fa-plus-circle"></i> Schedule Meeting

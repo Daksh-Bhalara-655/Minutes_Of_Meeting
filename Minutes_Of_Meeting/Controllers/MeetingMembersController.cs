@@ -20,33 +20,42 @@ namespace Minutes_Of_Meeting.Controllers
 
 
         [HttpGet]
-        public IActionResult Index(int MeetingId)
+        [HttpGet]
+        public IActionResult Index(int MeetingId, int DepartmentId)
         {
             ViewBag.MeetingId = MeetingId;
+
             List<Staff> staffs = new List<Staff>();
-            using(SqlConnection conn = db_Connection.CreateConnection())
+
+            using (SqlConnection conn = db_Connection.CreateConnection())
             {
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = conn;
-                cmd.CommandText = "SP_GET_ALL_STAFF";
+                SqlCommand cmd = new SqlCommand("SP_GET_ALL_STAFF_BY_DEPARTMENT_ID", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                // ✅ Pass DepartmentId to SP
+                cmd.Parameters.AddWithValue("@DEPARTMENTID", DepartmentId);
+
                 conn.Open();
+
                 SqlDataReader reader = cmd.ExecuteReader();
+
                 while (reader.Read())
                 {
-                    Staff staff = new Staff();
-                    staff.StaffID = Convert.ToInt32(reader["StaffID"]);
-                    staff.StaffName = reader["StaffName"].ToString();
-                    staff.DepartmentName = reader["DepartmentName"].ToString();
-                    staffs.Add(staff);
+                    Staff staff = new Staff
+                    {
+                        StaffID = Convert.ToInt32(reader["StaffID"]),
+                        StaffName = reader["StaffName"].ToString(),
+                        DepartmentName = reader["DepartmentName"].ToString()
+                    };
 
+                    staffs.Add(staff);
                 }
-            return View("Meeting_Member_List",staffs);
             }
 
+            return View("Meeting_Member_List", staffs);
         }
 
         // GET: /MeetingMembers/Create
-        [HttpPost]
         [HttpPost]
         public IActionResult Create(int MeetingId, List<int> SelectedStaff)
         {

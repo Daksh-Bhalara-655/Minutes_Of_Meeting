@@ -1,4 +1,4 @@
-﻿@model Minutes_Of_Meeting.Models.DashboardViewModel
+@model Minutes_Of_Meeting.Models.DashboardViewModel
 @using System.Text.Json
 @{
     ViewData["Title"] = "Dashboard";
@@ -155,18 +155,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-4">
-                <div class="chart-card">
-                    <div class="d-flex justify-content-between mb-2">
-                        <h6 class="fw-bold m-0">Top Regions</h6>
-                        <i class="fas fa-map-marker-alt text-muted"></i>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="regionChart"></canvas>
-                    </div>
-                </div>
-            </div>
         </div>
 
     </div>
@@ -174,63 +162,95 @@
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-        // Serialize data from server using System.Text.Json with camelCase
-        const typeDataJson = @Html.Raw(JsonSerializer.Serialize(Model.TypeData, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
-        const deptDataJson = @Html.Raw(JsonSerializer.Serialize(Model.DeptData, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
-        const trendDataJson = @Html.Raw(JsonSerializer.Serialize(Model.TrendData, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
+            // Serialize data from server
+            const typeDataJson = @Html.Raw(JsonSerializer.Serialize(Model.TypeData));
+            const deptDataJson = @Html.Raw(JsonSerializer.Serialize(Model.DeptData));
+            const trendDataJson = @Html.Raw(JsonSerializer.Serialize(Model.TrendData));
 
-        // Type Chart - extract labels and values (camelCase JSON)
-        const typeLabels = typeDataJson.map(function(d) { return d.label; });
-        const typeValues = typeDataJson.map(function(d) { return d.value; });
+            // Extract labels and values for Type Chart
+            const typeLabels = typeDataJson.map(function (d) { return d.label; });
+            const typeValues = typeDataJson.map(function (d) { return d.value; });
 
-        new Chart(document.getElementById('typeChart'), {
-        type: 'doughnut',
-        data: {
-        labels: typeLabels,
-        datasets: [{
-        data: typeValues,
-        backgroundColor: ['#7367f0', '#28c76f', '#00cfe8', '#ff9f43', '#ea5455'],
-        borderWidth: 0
-        }]
-        },
-        options: { responsive: true, cutout: '75%', plugins: { legend: { position: 'right' } } }
-        });
+            // Extract labels and values for Department Chart
+            const deptLabels = deptDataJson.map(function (d) { return d.label; });
+            const deptValues = deptDataJson.map(function (d) { return d.value; });
 
-        // Dept Chart - extract labels and values
-        const deptLabels = deptDataJson.map(function(d) { return d.label; });
-        const deptValues = deptDataJson.map(function(d) { return d.value; });
+            // Extract data for Trend Chart
+            const trendLabels = trendDataJson.map(function (d) { return d.month; });
+            const trendScheduled = trendDataJson.map(function (d) { return d.scheduled; });
+            const trendCompleted = trendDataJson.map(function (d) { return d.completed; });
 
-        new Chart(document.getElementById('deptChart'), {
-        type: 'bar',
-        data: {
-        labels: deptLabels,
-        datasets: [{
-        data: deptValues,
-        backgroundColor: '#7367f0',
-        borderRadius: 6
-        }]
-        },
-        options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
-        });
+            // Type Chart (Doughnut)
+            new Chart(document.getElementById('typeChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: typeLabels,
+                    datasets: [{
+                        data: typeValues,
+                        backgroundColor: ['#7367f0', '#28c76f', '#00cfe8', '#ff9f43'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    cutout: '75%',
+                    plugins: { legend: { position: 'right' } }
+                }
+            });
 
-        // Trend Chart - extract data
-        const trendLabels = trendDataJson.map(function(d) { return d.month; });
-        const trendSched = trendDataJson.map(function(d) { return d.scheduled; });
-        const trendComp = trendDataJson.map(function(d) { return d.completed; });
+            // Department Chart (Bar)
+            new Chart(document.getElementById('deptChart'), {
+                type: 'bar',
+                data: {
+                    labels: deptLabels,
+                    datasets: [{
+                        data: deptValues,
+                        backgroundColor: '#7367f0',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
 
-        new Chart(document.getElementById('trendChart'), {
-        type: 'line',
-        data: {
-        labels: trendLabels,
-        datasets: [
-        { label: 'Scheduled', data: trendSched, borderColor: '#7367f0', backgroundColor: 'rgba(115, 103, 240, 0.1)', fill: true, tension: 0.4 },
-        { label: 'Completed', data: trendComp, borderColor: '#28c76f', backgroundColor: 'transparent', borderDash: [5, 5], tension: 0.4 }
-        ]
-        },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } }, scales: { y: { grid: { color: '#f0f0f0' } }, x: { grid: { display: false } } } }
-        });
+            // Trend Chart (Line)
+            new Chart(document.getElementById('trendChart'), {
+                type: 'line',
+                data: {
+                    labels: trendLabels,
+                    datasets: [{
+                        label: 'Scheduled',
+                        data: trendScheduled,
+                        borderColor: '#7367f0',
+                        backgroundColor: 'rgba(115, 103, 240, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 4
+                    }, {
+                        label: 'Completed',
+                        data: trendCompleted,
+                        borderColor: '#28c76f',
+                        backgroundColor: 'transparent',
+                        borderDash: [5, 5],
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'top', labels: { usePointStyle: true } } },
+                    scales: {
+                        y: { grid: { color: '#f0f0f0' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
         });
     </script>
 }

@@ -10,33 +10,35 @@ namespace Minutes_Of_Meeting.Models
         [Required]
         public int DepartmentID { get; set; }
 
-        public string DepartmentName { get; set; }
+        public string? DepartmentName { get; set; }
 
         [Required(ErrorMessage = "Meeting date is required")]
         [DataType(DataType.Date)]
-        public DateTime MeetingDate { get; set; }
+        public DateTime MeetingDate { get; set; } 
 
         [Required(ErrorMessage = "Meeting description is required")]
-        [StringLength(500)]
+        [StringLength(250)]
         public string MeetingDescription { get; set; }
 
         public bool IsCancelled { get; set; }
 
         public string? DocumentPath { get; set; }
 
-        public string? MeetingTypeName { get; set; }
+        [Required(ErrorMessage = "Meeting type is required")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please select a meeting type")]
+        public int? MeetingTypeId { get; set; }
 
+        [Required(ErrorMessage = "Meeting venue is required")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please select a meeting venue")]
+        public int? MeetingVenueId { get; set; }
+
+        public string? MeetingTypeName { get; set; }
         public string? MeetingVenueName { get; set; }
 
         public string? CancellationReason { get; set; }
-
-        public string? CancellationReasonDescription { get; set; }
-
-        public DateTime Created { get; set; }
-
-        public DateTime Modified { get; set; } = DateTime.MinValue;
-
         public DateTime? CancellationDateTime { get; set; }
 
+        public DateTime Created { get; set; }
+        public DateTime Modified { get; set; } = DateTime.Now;
     }
 }

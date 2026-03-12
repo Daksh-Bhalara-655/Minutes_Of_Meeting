@@ -35,7 +35,8 @@
         <div class="card-body">
 
             <!-- FORM ADDED (No Design Change) -->
-            <form id="attendanceFilterForm" method="post" asp-action="attendance" asp-controller="MeetingAttendance">
+            <form method="post" asp-action="SaveAttendance" asp-controller="MeetingAttendance">
+                <input type="hidden" name="MeetingId" value="@Context.Request.Query["id"]" />
                 <div class="row g-3">
 
                     <div class="col-md-3">
@@ -44,8 +45,8 @@
                                class="form-control"
                                name="MeetingDate"
                                value="@(string.IsNullOrEmpty(Context.Request.Query["MeetingDate"])
-                                               ? DateTime.Today.ToString("yyyy-MM-dd")
-                                               : Context.Request.Query["MeetingDate"])" />
+                                                                                                      ? DateTime.Today.ToString("yyyy-MM-dd")
+                                                                                                      : Context.Request.Query["MeetingDate"])" />
                     </div>
 
                     <div class="col-md-3">
@@ -129,13 +130,17 @@
                                 <td>
                                     <span class="badge bg-info">@staff.DepartmentName</span>
                                 </td>
-                                <td class="@(staff.IsPresent ? "text-success" : "text-danger")">
-                                    64.71%
+                                <td class="
+                                    @(staff.AttendancePercent > 75 ? "text-success" :
+                                                                        staff.AttendancePercent >= 60 ? "text-warning" :
+                                                                        "text-danger")">
+                                    @staff.AttendancePercent.ToString("0.00")%
                                 </td>
                                 <td>
-                                    <span class="badge @(staff.IsPresent ? "bg-success" : "bg-danger")">
-                                        @(staff.IsPresent ? "Present" : "Absent")
-                                    </span>
+                                    <input type="checkbox"
+                                           name="PresentStaff"
+                                           value="@staff.StaffID"
+                                    @(staff.IsPresent ? "checked" : "") />
                                 </td>
                             </tr>
                         }
@@ -145,10 +150,18 @@
         </div>
 
         <div class="card-footer text-end">
-            <button class="btn btn-success">
+            <button type="submit" class="btn btn-success">
                 <i class="bi bi-save"></i> Save Attendance
             </button>
         </div>
+
+        <a asp-action="ExportAttendanceExcel"
+               asp-controller="MeetingAttendance"
+               asp-route-id="@Context.Request.Query["id"]"
+               asp-route-MeetingDate="@Context.Request.Query["MeetingDate"]"
+               class="btn btn-secondary mt-3">
+            <i class="bi bi-file-earmark-excel"></i> Export Excel
+        </a>
 
     </div>
 

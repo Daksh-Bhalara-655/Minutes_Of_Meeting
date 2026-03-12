@@ -1,26 +1,25 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Minutes_Of_Meeting.DbConfig;
 using Minutes_Of_Meeting.Models;
-using Microsoft.Data.SqlClient;
 using System.Data;
 
 namespace Minutes_Of_Meeting.Controllers
 {
-    public class HomeController : Controller
+    public class DashboardController : Controller
     {
-        private readonly Db_Connection db_Connection;
+        private readonly Db_Connection _db;
 
-        public HomeController(Db_Connection db_Connection)
+        public DashboardController(Db_Connection db)
         {
-            this.db_Connection = db_Connection;
+            _db = db;
         }
 
         public IActionResult Index()
         {
             var model = new DashboardViewModel();
 
-            using (var conn = db_Connection.CreateConnection())
+            using (var conn = _db.CreateConnection())
             using (var cmd = new SqlCommand("sp_GetDashboardData", conn))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -81,17 +80,6 @@ namespace Minutes_Of_Meeting.Controllers
             }
 
             return View(model);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

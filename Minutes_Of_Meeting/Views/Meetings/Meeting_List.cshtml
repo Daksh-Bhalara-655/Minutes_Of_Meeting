@@ -55,7 +55,7 @@
                         <tr>
                             <td>@count</td>
                             <td>@meeting.DepartmentName</td>
-                            <td>@meeting.MeetingDate.ToString("dd-MM-yyyy HH:mm:ss")</td>
+                            <td>@meeting.MeetingDate.ToString("dd-MM-yyyy")</td>
                             <td>@meeting.MeetingDescription</td>
                             <td>@meeting.MeetingTypeName</td>
                             <td>@meeting.MeetingVenueName</td>
@@ -93,6 +93,12 @@
                                        class="action-btn attendance btn-info"
                                        title="Manage Attendance">
                                         <i class="bi bi-person-check"></i>
+                                    </a>
+                                    <a asp-controller="MeetingMembers"
+                                       asp-action="Index"
+                                       asp-route-MeetingId="@meeting.MeetingID"
+                                       class="action-btn add-member">
+                                        <i class="bi bi-person-plus"></i>
                                     </a>
                                 </div>
                             </td>

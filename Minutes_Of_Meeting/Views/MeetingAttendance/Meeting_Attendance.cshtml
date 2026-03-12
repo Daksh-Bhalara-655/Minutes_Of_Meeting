@@ -35,7 +35,7 @@
         <div class="card-body">
 
             <!-- FORM ADDED (No Design Change) -->
-            <form method="get" asp-action="Index" asp-controller="MeetingAttendance">
+            <form id="attendanceFilterForm" method="post" asp-action="attendance" asp-controller="MeetingAttendance">
                 <div class="row g-3">
 
                     <div class="col-md-3">
@@ -179,4 +179,6 @@
 
         updateCounts();
     });
+
+   
 </script>

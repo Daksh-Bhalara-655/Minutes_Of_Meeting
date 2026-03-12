@@ -1,52 +1,142 @@
+@model IEnumerable<Minutes_Of_Meeting.Models.Staff>
+
 @{
     ViewData["Title"] = "Meeting Members";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link rel="stylesheet" href="~/css/meeting-member.css" asp-append-version="true" />
+
 <div class="container py-5">
+
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h4 class="main-title">Meeting Members</h4>
-        <a asp-controller="MeetingMembers" asp-action="Create" class="btn btn-gradient-primary">Add Member</a>
-    </div>
-    <div class="card custom-card">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Meeting</th>
-                            <th>Staff</th>
-                            <th>Present</th>
-                            <th>Remarks</th>
-                            <th>Created</th>
-                            <th>Modified</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @* static data *@
-                        <tr>
-                            <td>1</td>
-                            <td>Project Kickoff</td>
-                            <td>John Doe</td>
-                            <td>Yes</td>
-                            <td>Attended and contributed</td>
-                            <td>2024-01-15</td>
-                            <td>2024-01-16</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Design Review</td>
-                            <td>Jane Smith</td>
-                            <td>No</td>
-                            <td>Absent due to illness</td>
-                            <td>2024-02-10</td>
-                            <td>2024-02-11</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div>
+            <h3 class="fw-bold text-dark mb-1">Meeting Members</h3>
+            <p class="text-muted mb-0">Select the staff members to invite to this meeting.</p>
         </div>
     </div>
+
+    <form asp-action="Create" asp-controller="MeetingMembers" method="post">
+
+        <input type="hidden" name="MeetingId" value="@ViewBag.MeetingId" />
+
+        <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+
+            <!-- Card Header with Select All Toggle -->
+            <div class="card-header bg-white border-bottom px-4 py-3 d-flex justify-content-between align-items-center">
+                <span class="fw-semibold text-secondary">Staff List</span>
+                <div class="form-check form-switch mb-0">
+                    <input class="form-check-input cursor-pointer" type="checkbox" id="selectAllToggle">
+                    <label class="form-check-label text-muted user-select-none cursor-pointer" for="selectAllToggle">
+                        Select All
+                    </label>
+                </div>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light text-muted">
+                            <tr>
+                                <th class="ps-4 fw-medium border-0 py-3">#</th>
+                                <th class="fw-medium border-0 py-3">Staff ID</th>
+                                <th class="fw-medium border-0 py-3">Staff Name</th>
+                                <th class="fw-medium border-0 py-3">Department</th>
+                                <th class="text-center pe-4 fw-medium border-0 py-3">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @{
+                                int count = 1;
+                            }
+
+                            @foreach (var staff in Model)
+                            {
+                                <tr>
+                                    <td class="ps-4 text-muted">@count</td>
+                                    <td >
+                                        <span class="text-secondary font-monospace">@staff.StaffID</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <!-- Dynamic Initial Avatar -->
+                                            <div class="bg-primary bg-opacity-10 text-primary d-flex justify-content-center align-items-center rounded-circle me-3 fw-bold"
+                                                 style="width: 35px; height: 35px; font-size: 14px;">
+                                                @(string.IsNullOrEmpty(staff.StaffName) ? "?" : staff.StaffName.Substring(0, 1).ToUpper())
+                                            </div>
+                                            <span class="fw-medium">@staff.StaffName</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary-subtle px-2 py-1 rounded-pill">
+                                            @staff.DepartmentName
+                                        </span>
+                                    </td>
+                                    <td class="text-center pe-4">
+                                        <div class="form-check d-flex justify-content-center mb-0">
+                                            <input type="checkbox"
+                                                   class="form-check-input staff-checkbox border-secondary"
+                                                   name="StaffId"
+                                                   value="@staff.StaffID"
+                                                   style="cursor: pointer; width: 1.25rem; height: 1.25rem;" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                count++;
+                            }
+
+                            @if (!Model.Any())
+                            {
+                                <tr>
+                                    <td colspan="5" class="text-center py-5 text-muted">
+                                        <em>No staff members available.</em>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Card Footer -->
+            <div class="card-footer bg-white border-top px-4 py-3 text-end">
+                <button type="submit" class="btn btn-primary px-4 rounded-3 shadow-sm d-inline-flex align-items-center">
+                    Save Members
+                </button>
+            </div>
+        </div>
+
+    </form>
 </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const selectAllToggle = document.getElementById("selectAllToggle");
+            const staffCheckboxes = document.querySelectorAll(".staff-checkbox");
+
+            // Handle "Select All" click
+            if (selectAllToggle) {
+                selectAllToggle.addEventListener("change", function () {
+                    staffCheckboxes.forEach(function (checkbox) {
+                        checkbox.checked = selectAllToggle.checked;
+                    });
+                });
+            }
+
+            // Uncheck "Select All" if a single user is manually unchecked
+            staffCheckboxes.forEach(function (checkbox) {
+                checkbox.addEventListener("change", function () {
+                    if (!this.checked) {
+                        selectAllToggle.checked = false;
+                    } else {
+                        // Check if all are currently selected
+                        const allChecked = Array.from(staffCheckboxes).every(c => c.checked);
+                        selectAllToggle.checked = allChecked;
+                    }
+                });
+            });
+        });
+    </script>
+}

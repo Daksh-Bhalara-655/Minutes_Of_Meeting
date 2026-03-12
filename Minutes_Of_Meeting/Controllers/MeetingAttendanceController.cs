@@ -14,7 +14,7 @@ namespace Minutes_Of_Meeting.Controllers
         private readonly DepartmentList departmentList;
         private readonly MeetingTypeList meetingTypeList;
 
-        public MeetingAttendanceController(Db_Connection db_Connection , DepartmentList departmentList , MeetingTypeList meetingTypeList)
+        public MeetingAttendanceController(Db_Connection db_Connection, DepartmentList departmentList, MeetingTypeList meetingTypeList)
         {
             this.db_Connection = db_Connection;
             this.departmentList = departmentList;
@@ -22,11 +22,11 @@ namespace Minutes_Of_Meeting.Controllers
         }
 
 
-        public IActionResult Index(int ? id , DateOnly ? MeetingDate)
+        public IActionResult Index(int? id, DateOnly? MeetingDate)
         {
 
             ViewBag.DepartmentList = departmentList.GetDepartmentSelectList();
-                ViewBag.MeetingTypeList = meetingTypeList.GetMeetingTypeSelectList();  
+            ViewBag.MeetingTypeList = meetingTypeList.GetMeetingTypeSelectList();
 
             List<MeetingAttendanceModel> meetingAttendances = new List<MeetingAttendanceModel>();
 
@@ -67,13 +67,13 @@ namespace Minutes_Of_Meeting.Controllers
             }
 
 
-            return View("Meeting_Attendance",meetingAttendances);
-            }
-
-
-
-
-        
-
+            return View("Meeting_Attendance", meetingAttendances);
+        }
+        [HttpPost]
+        public IActionResult Filter(int? id, DateOnly? MeetingDate)
+        {
+            return RedirectToAction("Index", new { id = id, MeetingDate = MeetingDate });
+        }
     }
+
 }

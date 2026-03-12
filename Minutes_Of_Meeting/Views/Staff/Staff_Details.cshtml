@@ -6,93 +6,105 @@
 
 <link rel="stylesheet" href="~/css/staff-details.css" />
 
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8 col-xl-7">
-            
-            <div class="card profile-card">
-                <div class="profile-header text-center position-relative">
-                    <div class="avatar-circle">
+<div class="container-fluid py-4">
+    <!-- Page Header & Actions -->
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+        <div>
+            <h2 class="h4 mb-0 text-dark">Staff Profile</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 small">
+                    <li class="breadcrumb-item"><a asp-action="Index" class="text-decoration-none">Staff Directory</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Details</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="d-flex gap-2">
+            <a asp-action="Index" class="btn btn-outline-secondary btn-sm px-3">
+                <i class="bi bi-arrow-left me-1"></i> Back
+            </a>
+            <a asp-action="Create" asp-route-id="@Model.StaffID" class="btn btn-primary btn-sm px-3">
+                <i class="bi bi-pencil me-1"></i> Edit Profile
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Left Column: Identity Card -->
+        <div class="col-xl-4 col-lg-5 mb-4">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body text-center pt-5">
+                    <div class="avatar-professional mb-4 mx-auto">
                         @(string.IsNullOrEmpty(Model.StaffName) ? "?" : Model.StaffName.Substring(0, 1).ToUpper())
                     </div>
-                    <h3 class="text-white fw-bold mb-1">@Model.StaffName</h3>
-                    <span class="badge bg-white text-primary rounded-pill px-3 py-2 shadow-sm">
-                        <i class="bi bi-person-badge me-1"></i> ID: @Model.StaffID
-                    </span>
-                </div>
+                    <h4 class="fw-bold text-dark mb-1">@Model.StaffName</h4>
+                    <p class="text-muted mb-3">@Model.DepartmentName</p>
 
-                <div class="profile-body position-relative">
-                    <div class="row g-4">
-                        
-                        <div class="col-md-6 d-flex align-items-center">
-                            <div class="icon-box me-3">
-                                <i class="bi bi-building"></i>
-                            </div>
-                            <div>
-                                <div class="info-label">Department</div>
-                                <div class="info-value">
-                                    <span class="badge bg-info text-dark">@Model.DepartmentName</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 d-flex align-items-center">
-                            <div class="icon-box me-3">
-                                <i class="bi bi-phone"></i>
-                            </div>
-                            <div>
-                                <div class="info-label">Mobile Number</div>
-                                <div class="info-value">@Model.MobileNo</div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 d-flex align-items-center">
-                            <div class="icon-box me-3">
-                                <i class="bi bi-envelope"></i>
-                            </div>
-                            <div>
-                                <div class="info-label">Email Address</div>
-                                <div class="info-value">@Model.EmailAddress</div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 d-flex align-items-start mt-4">
-                            <div class="icon-box me-3 mt-1">
-                                <i class="bi bi-chat-left-text"></i>
-                            </div>
-                            <div>
-                                <div class="info-label">Remarks</div>
-                                <div class="info-value text-muted">
-                                    @(string.IsNullOrEmpty(Model.Remarks) ? "No remarks available." : Model.Remarks)
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr class="my-4 text-muted opacity-25" />
-
-                        <div class="col-md-6">
-                            <div class="info-label"><i class="bi bi-calendar-plus me-1"></i> Created On</div>
-                            <div class="small text-muted">@Model.Created.ToString("dd MMM yyyy, hh:mm tt")</div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="info-label"><i class="bi bi-calendar-check me-1"></i> Last Modified</div>
-                            <div class="small text-muted">@Model.Modified.ToString("dd MMM yyyy, hh:mm tt")</div>
-                        </div>
-
-                    </div>
-
-                    <div class="mt-5 d-flex justify-content-end gap-2">
-                        <a asp-action="Index" class="btn btn-light px-4 border">
-                            <i class="bi bi-arrow-left me-2"></i> Back to List
-                        </a>
-                        <a asp-action="Create" asp-route-id="@Model.StaffID" class="btn btn-primary px-4 shadow-sm">
-                            <i class="bi bi-pencil-square me-2"></i> Edit Profile
-                        </a>
+                    <div class="d-inline-block bg-light rounded px-3 py-2 border mb-4">
+                        <span class="text-muted small fw-bold text-uppercase">Staff ID</span>
+                        <span class="ms-2 fw-bold text-dark">@Model.StaffID</span>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <!-- Right Column: Detailed Information -->
+        <div class="col-xl-8 col-lg-7 mb-4">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h5 class="mb-0 text-dark">Personal Information</h5>
+                </div>
+                <div class="card-body px-4 py-4">
+
+                    <div class="row mb-4">
+                        <div class="col-sm-4 text-muted small text-uppercase fw-semibold">Email Address</div>
+                        <div class="col-sm-8 text-dark">
+                            <i class="bi bi-envelope text-primary me-2"></i> @Model.EmailAddress
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-sm-4 text-muted small text-uppercase fw-semibold">Mobile Number</div>
+                        <div class="col-sm-8 text-dark">
+                            <i class="bi bi-phone text-primary me-2"></i> @Model.MobileNo
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-sm-4 text-muted small text-uppercase fw-semibold">Department</div>
+                        <div class="col-sm-8 text-dark">
+                            <i class="bi bi-building text-primary me-2"></i> @Model.DepartmentName
+                        </div>
+                    </div>
+
+                    <hr class="text-muted my-4">
+
+                    <div class="row mb-4">
+                        <div class="col-sm-4 text-muted small text-uppercase fw-semibold">Remarks</div>
+                        <div class="col-sm-8 text-dark">
+                            @if (string.IsNullOrEmpty(Model.Remarks))
+                            {
+                                <span class="text-muted fst-italic">No remarks available.</span>
+                            }
+                            else
+                            {
+                                @Model.Remarks
+                            }
+                        </div>
+                    </div>
+
+                    <div class="bg-light rounded p-3 mt-5 border">
+                        <div class="row text-muted small">
+                            <div class="col-md-6 mb-2 mb-md-0">
+                                <i class="bi bi-clock-history me-1"></i> <strong>Created:</strong> @Model.Created.ToString("dd MMM yyyy, hh:mm tt")
+                            </div>
+                            <div class="col-md-6">
+                                <i class="bi bi-pencil-square me-1"></i> <strong>Last Modified:</strong> @Model.Modified.ToString("dd MMM yyyy, hh:mm tt")
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>

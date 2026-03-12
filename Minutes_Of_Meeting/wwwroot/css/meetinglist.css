@@ -136,3 +136,11 @@
         .action-btn.attendance i {
             pointer-events: none;
         }
+
+    .action-btn.add-member {
+        background: #28a745;
+    }
+
+        .action-btn.add-member:hover {
+            background: #218838;
+        }

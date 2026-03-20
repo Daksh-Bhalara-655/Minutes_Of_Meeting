@@ -423,7 +423,52 @@ BEGIN
     WHERE StaffID = @StaffID;
 END
 GO
+
+---------------------------DASHBOARD------------------------------------------------------
+CREATE OR ALTER PROCEDURE sp_GetDashboardData
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- 1) Stats
+    SELECT
+        COUNT(*) AS TotalMeetings,
+        SUM(CASE WHEN MeetingDate > GETDATE() AND (IsCancelled IS NULL OR IsCancelled = 0) THEN 1 ELSE 0 END) AS UpcomingMeetings,
+        SUM(CASE WHEN MeetingDate <= GETDATE() AND (IsCancelled IS NULL OR IsCancelled = 0) THEN 1 ELSE 0 END) AS CompletedMeetings,
+        SUM(CASE WHEN IsCancelled = 1 THEN 1 ELSE 0 END) AS CancelledMeetings
+    FROM MOM_Meetings;
+
+    -- 2) Meetings by Type
+    SELECT mt.MeetingTypeName AS Label, COUNT(m.MeetingID) AS Value
+    FROM MOM_Meetings m
+    JOIN MOM_MeetingType mt ON m.MeetingTypeID = mt.MeetingTypeID
+    GROUP BY mt.MeetingTypeName
+    ORDER BY Value DESC;
+
+    -- 3) Meetings by Department
+    SELECT d.DepartmentName AS Label, COUNT(m.MeetingID) AS Value
+    FROM MOM_Meetings m
+    JOIN MOM_Department d ON m.DepartmentID = d.DepartmentID
+    GROUP BY d.DepartmentName
+    ORDER BY Value DESC;
+
+    -- 4) Monthly trend for last 12 months (Scheduled & Completed)
+    ;WITH Months AS (
+        SELECT TOP (12) DATEADD(MONTH, - (ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) -1), DATEFROMPARTS(YEAR(GETDATE()), MONTH(GETDATE()), 1)) AS MonthStart
+        FROM sys.all_objects
+    )
+    SELECT
+        FORMAT(mo.MonthStart, 'yyyy-MM') AS Month,
+        ISNULL(SUM(CASE WHEN CAST(m.MeetingDate AS DATE) >= mo.MonthStart AND CAST(m.MeetingDate AS DATE) < DATEADD(MONTH,1,mo.MonthStart) THEN 1 ELSE 0 END),0) AS Scheduled,
+        ISNULL(SUM(CASE WHEN CAST(m.MeetingDate AS DATE) >= mo.MonthStart AND CAST(m.MeetingDate AS DATE) < DATEADD(MONTH,1,mo.MonthStart) AND (m.MeetingDate <= GETDATE() AND (m.IsCancelled IS NULL OR m.IsCancelled = 0)) THEN 1 ELSE 0 END),0) AS Completed
+    FROM Months mo
+    LEFT JOIN MOM_Meetings m ON CAST(m.MeetingDate AS DATE) >= mo.MonthStart AND CAST(m.MeetingDate AS DATE) < DATEADD(MONTH,1,mo.MonthStart)
+    GROUP BY mo.MonthStart
+    ORDER BY mo.MonthStart;
+END
+GO
 ```
+
 
 ---
 
